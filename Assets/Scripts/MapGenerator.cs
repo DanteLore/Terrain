@@ -13,6 +13,7 @@ public class MapGenerator : MonoBehaviour
     public AnimationCurve meshHeightCurve;
     public float noiseScale = 10f;
     public bool autoUpdate = true;
+    [Range(1, 10)]
     public int octaves = 3;
     [Range(0, 1)]
     public float persistence = 0.5f;
