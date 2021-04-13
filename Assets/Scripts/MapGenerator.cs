@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    public enum DrawMode { NoiseMap, ColorMap }
+
     public int mapWidth = 100;
     public int mapHeight = 100;
     public float noiseScale = 10f;
@@ -14,14 +16,38 @@ public class MapGenerator : MonoBehaviour
     public float lacunarity = 2f;
     public int seed;
     public Vector2 offset;
+    public TerrainType[] regions;
+    public DrawMode drawMode;
 
     public void GenerateMap() 
     {
         float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistence, lacunarity, offset);
 
+        Color[] colorMap = new Color[mapWidth * mapHeight];
+        for(int y = 0; y < mapHeight; y++)
+        {
+            for(int x = 0; x < mapWidth; x++)
+            {
+                float currentHeight = noiseMap[x, y];
+
+                for(int i = 0; i < regions.Length; i++)
+                {
+                    if(currentHeight <= regions[i].height)
+                    {
+                        colorMap[y * mapWidth + x] = regions[i].color;
+                        break;
+                    }
+                }
+            }
+        }
+
         MapDisplay display = FindObjectOfType<MapDisplay>();
 
-        display.DrawNoiseMap(noiseMap);
+        if(drawMode == DrawMode.NoiseMap)
+            display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
+        else
+            display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+        
     }
 
     void OnValidate()
@@ -38,4 +64,12 @@ public class MapGenerator : MonoBehaviour
         if(octaves <= 0)
             octaves = 1;
     }
+}
+
+[System.Serializable]
+public struct TerrainType 
+{
+    public float height;
+    public Color color;
+    public string name;
 }
