@@ -12,7 +12,7 @@ public class MapGenerator : MonoBehaviour
     public NoiseData noiseData;
     public TextureData textureData;
 
-    public material terrainMaterial;
+    public Material terrainMaterial;
 
     [Range(0, 6)]
     public int editorPreviewLevelOfDetail;
@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
 
     private void OnTextureValuesUpdated()
     {
-        testureData.ApplyToMaterial(terrainMaterial);
+        textureData.ApplyToMaterial(terrainMaterial);
     }
 
     public int MapChunkSize{
