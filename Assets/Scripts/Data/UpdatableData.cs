@@ -8,10 +8,11 @@ public class UpdatableData : ScriptableObject
     protected virtual void OnValidate()
     {
         if(autoUpdate)
-            ValuesUpdated();
+            UnityEditor.EditorApplication.update += ValuesUpdated;
     }
 
     public void ValuesUpdated() {
+        UnityEditor.EditorApplication.update -= ValuesUpdated;
         if(OnValuesUpdated != null)
             OnValuesUpdated();
     }
