@@ -112,8 +112,6 @@ public class MeshData
         int numberOfEdgeConnectionVertices = (skipIncrement - 1) * (numVertsPerLine - 5) / skipIncrement * 4;
         int numberOfMainVerticesPerLine = (numVertsPerLine - 5) / skipIncrement + 1;
         int numMainVertices = numberOfMainVerticesPerLine * numberOfMainVerticesPerLine;
-
-        Debug.Log("Skip inc=" + skipIncrement + " numberOfMeshEdgeVertices=" + numberOfMeshEdgeVertices + " numberOfEdgeConnectionVertices=" + numberOfEdgeConnectionVertices + " numMainVertices=" + numMainVertices);
         
         vertices = new Vector3[numberOfMeshEdgeVertices + numberOfEdgeConnectionVertices + numMainVertices];
         uvs = new Vector2[vertices.Length];
@@ -151,18 +149,11 @@ public class MeshData
         }
         else
         {
-            try
-            {
-                triangles[triangleIndex] = a;
-                triangles[triangleIndex + 1] = b;
-                triangles[triangleIndex + 2] = c;
+            triangles[triangleIndex] = a;
+            triangles[triangleIndex + 1] = b;
+            triangles[triangleIndex + 2] = c;
 
-                triangleIndex += 3;
-            }
-            catch (Exception e)
-            {
-                Debug.Log("Error adding triangle: index=" + triangleIndex + " Length=" + triangles.Length + " - " + e.Message);
-            }
+            triangleIndex += 3;
         }
     }
 
