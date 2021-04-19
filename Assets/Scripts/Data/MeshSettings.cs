@@ -12,12 +12,13 @@ public class MeshSettings : UpdatableData
 
     [Range(0, numSupportedChunkSizes - 1)]
     public int chunkSizeIndex;
+
     [Range(0, numSupportedFlatShadedChunkSizes - 1)]
     public int flatShadedChunkSizeIndex;
 
     // Number of vertices per line of a mesh rendered at LOD = 0. Includes the 2 extra vertices at the edges used for normals but not rendered.
     public int NumberOfVerticesPerLine{
-        get { return supportedChunkSizes[useFlatShading ? flatShadedChunkSizeIndex : chunkSizeIndex] + 1 ; }
+        get { return supportedChunkSizes[useFlatShading ? flatShadedChunkSizeIndex : chunkSizeIndex] + 5; }
     }
     public float MeshWorldSize {
         get { return (NumberOfVerticesPerLine - 3) * meshScale; }
