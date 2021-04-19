@@ -4,13 +4,8 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
-    public const int numSupportedLODs = 5;
-    public const int numSupportedChunkSizes = 9;
-    public const int numSupportedFlatShadedChunkSizes = 3;
-    public static readonly int[] supportedChunkSizes = { 48, 72, 96, 120, 144, 168, 192, 216, 240 };
-    public static readonly int[] supportedFlatShadedChunkSizes = { 48, 72, 96 };
 
-    public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve parentHeightCurve, int levelOfDetail, bool useFlatShading)
+    public static MeshData GenerateTerrainMesh(float[,] heightMap, MeshSettings meshSettings, int levelOfDetail)
     {
         int meshSimplificationIncrement = (levelOfDetail == 0) ? 1 : levelOfDetail * 2;
 
@@ -21,11 +16,10 @@ public static class MeshGenerator
         float topLeftX = (meshSizeUnsimplified - 1) / -2f;
         float topLeftZ = (meshSizeUnsimplified - 1) / 2f;
 
-        int verticesPerLine = (borderedSize - 1) / meshSimplificationIncrement + 1;
+        int verticesPerLine = (meshSize - 1) / meshSimplificationIncrement + 1;
 
-        AnimationCurve heightCurve = new AnimationCurve(parentHeightCurve.keys);
 
-        MeshData meshData = new MeshData(verticesPerLine, useFlatShading);
+        MeshData meshData = new MeshData(verticesPerLine, meshSettings.useFlatShading);
 
         int[,] vertexIndicesMap = new int[borderedSize, borderedSize];
         int meshVertexIndex = 0;
@@ -51,8 +45,8 @@ public static class MeshGenerator
                 int vertexIndex = vertexIndicesMap[x, y];
 
                 Vector2 percent = new Vector2((x - meshSimplificationIncrement) / (float)meshSize, (y - meshSimplificationIncrement) / (float)meshSize);
-                float height = heightCurve.Evaluate(heightMap[x, y]) * heightMultiplier;
-                Vector3 vertexPosition = new Vector3(topLeftX + percent.x * meshSizeUnsimplified, height, topLeftZ - percent.y * meshSizeUnsimplified);
+                float height = heightMap[x, y];
+                Vector3 vertexPosition = new Vector3((topLeftX + percent.x * meshSizeUnsimplified) * meshSettings.meshScale, height, (topLeftZ - percent.y * meshSizeUnsimplified) * meshSettings.meshScale);
 
                 meshData.AddVertex(vertexPosition, percent, vertexIndex);
 
@@ -94,12 +88,12 @@ public class MeshData
     public MeshData(int verticesPerLine, bool useFlatShading)
     {
         this.useFlatShading = useFlatShading;
-        triangleIndex = 0;
+        
         vertices = new Vector3[verticesPerLine * verticesPerLine];
         uvs = new Vector2[verticesPerLine * verticesPerLine];
         triangles = new int[(verticesPerLine - 1) * (verticesPerLine - 1) * 6];
 
-        borderVertices = new Vector3[verticesPerLine * 4 + 1];
+        borderVertices = new Vector3[verticesPerLine * 4 + 4];
         borderTriangles = new int[24 * verticesPerLine];
     }
 
