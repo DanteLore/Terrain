@@ -4,13 +4,14 @@ using UnityEngine.AI;
 public class TerrainChunk
 {
     public event System.Action<TerrainChunk, bool> OnVisibilityChanged;
+    public event System.Action<TerrainChunk> HeightMapReady;
     const float colliderGenerationDistanceThreashold = 5;
 
     public Vector2 coord;
 
     public GameObject meshObject;
     public Vector2 sampleCenter;
-    private Bounds bounds;
+    public Bounds bounds;
 
     MeshRenderer meshRenderer;
     MeshFilter meshFilter;
@@ -31,8 +32,26 @@ public class TerrainChunk
     private MeshSettings meshSettings;
     private Transform viewer;
 
-
     private NavMeshSurface navMeshSurface;
+
+    public int MapHeight
+    {
+        get { return heightMap.values.GetLength(1); }
+    }
+
+    public int MapWidth
+    {
+        get { return heightMap.values.GetLength(0); }
+    }
+
+    public float MinHeight
+    {
+        get { return heightMapSettings.MinHeight; }
+    }
+    public float MaxHeight
+    {
+        get { return heightMapSettings.MaxHeight; }
+    }
 
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLodIndex, Transform parent, Transform viewer, Material material)
     {
@@ -74,10 +93,23 @@ public class TerrainChunk
         ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.NumberOfVerticesPerLine, meshSettings.NumberOfVerticesPerLine, heightMapSettings, sampleCenter), OnHeightMapReceived);
     }
 
+    public Vector3 MapToWorldPoint(int x, int y)
+    {
+        float height = heightMap.values[x, y];
+        Vector2 topLeft = new Vector2(-1, 1) * (meshSettings.MeshWorldSize / 2f);
+        Vector2 percent = new Vector2(x - 1, y - 1) / (meshSettings.NumberOfVerticesPerLine - 3);
+        Vector2 vertexPosition2D = topLeft + sampleCenter + new Vector2(percent.x, -percent.y) * meshSettings.MeshWorldSize;
+
+        return new Vector3(vertexPosition2D.x, height, vertexPosition2D.y);
+    }
+
     private void OnHeightMapReceived(object data)
     {
         this.heightMap = (HeightMap)data;
         heightMapReceived = true;
+
+        if(HeightMapReady != null)
+            HeightMapReady(this);
 
         UpdateTerrainChunk();
     }
@@ -133,6 +165,7 @@ public class TerrainChunk
 
     private void BuildNavMesh()
     {
+        /*
         if(navMeshSurface == null)
         {
             float squareDistanceFromViewerToEdge = bounds.SqrDistance(ViewerPosition);
@@ -147,6 +180,7 @@ public class TerrainChunk
                 navMeshSurface.BuildNavMesh();
             }
         }
+        */
     }
 
     public void UpdateCollisionMesh()

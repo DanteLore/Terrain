@@ -26,6 +26,13 @@ public class TerrainGenerator : MonoBehaviour
     private Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>(); 
     private static List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
 
+    private TreeGenerator treeGenerator;
+
+    public void Awake()
+    {
+        treeGenerator = GetComponent<TreeGenerator>();
+    }
+
     public void Start()
     {
         textureSettings.ApplyToMaterial(mapMaterial);
@@ -87,6 +94,7 @@ public class TerrainGenerator : MonoBehaviour
                     else
                     {
                         var newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLodIndex, transform, viewer, mapMaterial);
+                        newChunk.HeightMapReady += treeGenerator.AddTrees;
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.OnVisibilityChanged += OnTerrainChunkVisibilityChanged;
                         newChunk.Load();

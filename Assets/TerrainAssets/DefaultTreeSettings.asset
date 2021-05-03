@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
+  m_Name: DefaultTreeSettings
+  m_EditorClassIdentifier: 
+  gridStep: 2
+  placementProbability: 0.1
+  trees:
+  - name: Deciduous
+    prefabs:
+    - {fileID: 138344, guid: 8a7cf5ac7b4145441a3dca86f869b09e, type: 3}
+    - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
+    - {fileID: 151190, guid: a9cc5585b9634a9449920c03ec6bc243, type: 3}
+    - {fileID: 188972, guid: 7641c7e8354e2c44cab6432d9d2c6d1b, type: 3}
+    minHeight: 0.1
+    maxHeight: 0.3
+  - name: Palm
+    prefabs:
+    - {fileID: 174854, guid: 3fd9507fb16d56044bcf520c1d14427c, type: 3}
+    - {fileID: 118422, guid: 107cc8771223daf48be99527559937ff, type: 3}
+    - {fileID: 136866, guid: 2327ed4809c34cf4c97a5316db3d4796, type: 3}
+    - {fileID: 176278, guid: 3c74caa0496b18d4ba0a1009ebb4c992, type: 3}
+    minHeight: 0.03
+    maxHeight: 0.05
