@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TerrainChunk
 {
@@ -29,6 +30,9 @@ public class TerrainChunk
     private HeightMapSettings heightMapSettings;
     private MeshSettings meshSettings;
     private Transform viewer;
+
+
+    private NavMeshSurface navMeshSurface;
 
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLodIndex, Transform parent, Transform viewer, Material material)
     {
@@ -82,6 +86,8 @@ public class TerrainChunk
 
     public void UpdateTerrainChunk()
     {
+        BuildNavMesh();
+
         if(heightMapReceived)
         {
             float viewerDistanceFromNearestEdge = Mathf.Sqrt(bounds.SqrDistance(ViewerPosition));
@@ -121,6 +127,24 @@ public class TerrainChunk
 
                 if(OnVisibilityChanged != null)
                     OnVisibilityChanged(this, visible);
+            }
+        }
+    }
+
+    private void BuildNavMesh()
+    {
+        if(navMeshSurface == null)
+        {
+            float squareDistanceFromViewerToEdge = bounds.SqrDistance(ViewerPosition);
+            
+            if(bounds.Contains(ViewerPosition) || squareDistanceFromViewerToEdge <= colliderGenerationDistanceThreashold * colliderGenerationDistanceThreashold)
+            {
+                Debug.Log("Building navmesh");
+                navMeshSurface = meshObject.AddComponent<NavMeshSurface>();
+                navMeshSurface.collectObjects = CollectObjects.Children;
+                navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
+
+                navMeshSurface.BuildNavMesh();
             }
         }
     }
