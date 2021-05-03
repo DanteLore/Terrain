@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultTreeSettings
   m_EditorClassIdentifier: 
   gridStep: 2
-  placementProbability: 0.1
+  placementProbability: 0.05
   trees:
   - name: Deciduous
     prefabs:
