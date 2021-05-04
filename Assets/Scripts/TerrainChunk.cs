@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class TerrainChunk
 {
-    public event System.Action<TerrainChunk, bool> OnVisibilityChanged;
+    public event System.Action<TerrainChunk, bool> VisibilityChanged;
     public event System.Action<TerrainChunk> HeightMapReady;
     const float colliderGenerationDistanceThreashold = 5;
 
@@ -157,8 +157,8 @@ public class TerrainChunk
             {
                 SetVisible(visible);
 
-                if(OnVisibilityChanged != null)
-                    OnVisibilityChanged(this, visible);
+                if(VisibilityChanged != null)
+                    VisibilityChanged(this, visible);
             }
         }
     }

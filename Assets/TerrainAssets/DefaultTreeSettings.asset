@@ -21,8 +21,8 @@ MonoBehaviour:
     - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
     - {fileID: 151190, guid: a9cc5585b9634a9449920c03ec6bc243, type: 3}
     - {fileID: 188972, guid: 7641c7e8354e2c44cab6432d9d2c6d1b, type: 3}
-    minHeight: 0.1
-    maxHeight: 0.3
+    minHeight: 0.05
+    maxHeight: 0.35
   - name: Palm
     prefabs:
     - {fileID: 174854, guid: 3fd9507fb16d56044bcf520c1d14427c, type: 3}
@@ -31,3 +31,12 @@ MonoBehaviour:
     - {fileID: 176278, guid: 3c74caa0496b18d4ba0a1009ebb4c992, type: 3}
     minHeight: 0.03
     maxHeight: 0.05
+  - name: Pine
+    prefabs:
+    - {fileID: 166966, guid: 78c29697749a6d44e964f9a0cf83d77a, type: 3}
+    - {fileID: 152404, guid: 5037d6ea184d2f640bf78dcf9894a269, type: 3}
+    - {fileID: 115020, guid: a0c53a09e4a37b5409b1248ebce2c376, type: 3}
+    - {fileID: 166856, guid: 99a48108c5a1932488c06e519f6097f4, type: 3}
+    - {fileID: 184622, guid: c7bcf19bbfa57ed4ea9147dff66d5542, type: 3}
+    minHeight: 0.25
+    maxHeight: 0.7
