@@ -47,7 +47,7 @@ public class TreeGenerator : MonoBehaviour
             GameObject tree = Instantiate(prefabs[Random.Range(0, prefabs.Count)]);
             tree.transform.SetParent(transform);
 
-            tree.transform.position = pos;
+            tree.transform.position = pos + new Vector3(0f, -0.05f, 0f);
             tree.transform.localScale = Vector3.one * Random.Range(0.75f, 1.25f);
             tree.transform.eulerAngles = new Vector3(Random.Range(0f, 5f), Random.Range(0f, 360f), Random.Range(0f, 5f));
 
