@@ -76,9 +76,9 @@ public class MapPreview : MonoBehaviour
 
     private void OnValuesUpdated() {
         if(!Application.isPlaying)
-            DrawMapInEditor();
+            Invoke("DrawMapInEditor", 0.5f);
     }
-
+    
     private void OnTextureValuesUpdated()
     {
         textureData.ApplyToMaterial(terrainMaterial);

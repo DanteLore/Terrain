@@ -30,6 +30,8 @@ public class TreeGenerator : MonoBehaviour
             }
         }
 
+        Debug.Log("Tile has " + trees[chunk.coord].Count + " trees");
+
         OnChunkVisibilityChanged(chunk, chunk.IsVisible());
     }
 
