@@ -18,16 +18,9 @@ public class WaterDecorator : MonoBehaviour, IChunkDecorator
 
     public void OnHeightMapReady(TerrainChunk chunk)
     {
-        Debug.Log("Min: " + chunk.MinLocalHeight + " Max: " + chunk.MaxLocalHeight);
         if(chunk.MinLocalHeight < waterLevel)
         {
-            Debug.Log("Adding a water plane to this chunk");
-
             AddPlane(chunk);
-        }
-        else
-        {
-            Debug.Log("NOT Adding a water plane to this chunk");
         }
     }
 
