@@ -51,6 +51,11 @@ public class TerrainChunk
         get { return heightMapSettings.MaxHeight; }
     }
 
+    public float TileSize
+    {
+        get { return meshSettings.MeshWorldSize; }
+    }
+
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLodIndex, Transform parent, Transform viewer, Material material)
     {
         this.coord = coord;
