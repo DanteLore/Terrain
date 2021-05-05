@@ -42,13 +42,22 @@ public class TerrainChunk
         get { return heightMap.values.GetLength(0); }
     }
 
-    public float MinHeight
+    public float MinPossibleHeight
     {
         get { return heightMapSettings.MinHeight; }
     }
-    public float MaxHeight
+    public float MaxPossibleHeight
     {
         get { return heightMapSettings.MaxHeight; }
+    }
+
+    public float MinLocalHeight
+    {
+        get { return heightMap.minValue; }
+    }
+    public float MaxLocalHeight
+    {
+        get { return heightMap.maxValue; }
     }
 
     public float TileSize

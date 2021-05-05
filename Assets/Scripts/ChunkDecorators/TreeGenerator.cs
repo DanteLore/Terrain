@@ -38,7 +38,7 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
     private GameObject PlaceTree(TerrainChunk chunk, int x, int y)
     {
         Vector3 pos = chunk.MapToWorldPoint(x, y);
-        float normHeight = Mathf.InverseLerp(chunk.MinHeight, chunk.MaxHeight, pos.y);
+        float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         var possibleTrees = treeSettings.trees.Where(t => normHeight >= t.minHeight && normHeight <= t.maxHeight).ToList();
 
@@ -61,6 +61,5 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
 
     public void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
     {
-        
     }
 }
