@@ -47,7 +47,7 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
             var prefabs = possibleTrees.SelectMany(t => t.prefabs).ToList();
 
             GameObject tree = Instantiate(prefabs[Random.Range(0, prefabs.Count)]);
-            tree.transform.SetParent(transform);
+            tree.transform.SetParent(chunk.meshObject.transform);
 
             tree.transform.position = pos + new Vector3(0f, -0.05f, 0f);
             tree.transform.localScale = Vector3.one * Random.Range(0.75f, 1.25f);
@@ -61,12 +61,6 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
 
     public void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
     {
-        if(trees.ContainsKey(chunk.coord))
-        {
-            foreach(var tree in trees[chunk.coord])
-            {
-                tree.SetActive(visible);
-            }
-        }
+        
     }
 }

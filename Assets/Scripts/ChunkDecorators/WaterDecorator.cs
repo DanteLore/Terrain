@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterDecorator : MonoBehaviour, IChunkDecorator
 {
-    public float waterLevel = 0.1f;
+    public float waterLevel = 0.01f;
 
     public GameObject waterPrefab;
 
