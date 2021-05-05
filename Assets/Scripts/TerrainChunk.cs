@@ -32,8 +32,6 @@ public class TerrainChunk
     private MeshSettings meshSettings;
     private Transform viewer;
 
-    private NavMeshSurface navMeshSurface;
-
     public int MapHeight
     {
         get { return heightMap.values.GetLength(1); }
@@ -118,8 +116,6 @@ public class TerrainChunk
 
     public void UpdateTerrainChunk()
     {
-        BuildNavMesh();
-
         if(heightMapReceived)
         {
             float viewerDistanceFromNearestEdge = Mathf.Sqrt(bounds.SqrDistance(ViewerPosition));
@@ -156,31 +152,8 @@ public class TerrainChunk
             if(wasVisible != visible)
             {
                 SetVisible(visible);
-
-                if(VisibilityChanged != null)
-                    VisibilityChanged(this, visible);
             }
         }
-    }
-
-    private void BuildNavMesh()
-    {
-        /*
-        if(navMeshSurface == null)
-        {
-            float squareDistanceFromViewerToEdge = bounds.SqrDistance(ViewerPosition);
-            
-            if(bounds.Contains(ViewerPosition) || squareDistanceFromViewerToEdge <= colliderGenerationDistanceThreashold * colliderGenerationDistanceThreashold)
-            {
-                Debug.Log("Building navmesh");
-                navMeshSurface = meshObject.AddComponent<NavMeshSurface>();
-                navMeshSurface.collectObjects = CollectObjects.Children;
-                navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
-
-                navMeshSurface.BuildNavMesh();
-            }
-        }
-        */
     }
 
     public void UpdateCollisionMesh()
@@ -207,6 +180,9 @@ public class TerrainChunk
     public void SetVisible(bool visible)
     {
         meshObject.SetActive(visible);
+
+        if(VisibilityChanged != null)
+            VisibilityChanged(this, visible);
     }
 
     public bool IsVisible()
@@ -214,7 +190,6 @@ public class TerrainChunk
         return meshObject.activeSelf;
     }
 }
-
 
 class LODMesh
 {

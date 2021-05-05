@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class TreeGenerator : MonoBehaviour
+public class TreeGenerator : MonoBehaviour, IChunkDecorator
 {
     public TreeSettings treeSettings;
     private Dictionary<Vector2, List<GameObject>> trees;
@@ -30,7 +30,7 @@ public class TreeGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log("Tile has " + trees[chunk.coord].Count + " trees");
+        //Debug.Log("Tile has " + trees[chunk.coord].Count + " trees");
 
         OnChunkVisibilityChanged(chunk, chunk.IsVisible());
     }

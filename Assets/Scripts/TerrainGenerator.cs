@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -26,11 +27,11 @@ public class TerrainGenerator : MonoBehaviour
     private Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>(); 
     private static List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
 
-    private TreeGenerator treeGenerator;
+    private List<IChunkDecorator> chunkDecorators;
 
     public void Awake()
     {
-        treeGenerator = GetComponent<TreeGenerator>();
+        chunkDecorators = GetComponents<IChunkDecorator>().ToList();
     }
 
     public void Start()
@@ -94,10 +95,19 @@ public class TerrainGenerator : MonoBehaviour
                     else
                     {
                         var newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLodIndex, transform, viewer, mapMaterial);
-                        newChunk.HeightMapReady += treeGenerator.OnHeightMapReady;
-                        newChunk.VisibilityChanged += treeGenerator.OnChunkVisibilityChanged;
+
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.VisibilityChanged += OnTerrainChunkVisibilityChanged;
+
+                        if(chunkDecorators != null)
+                        {
+                            foreach(var decorator in chunkDecorators)
+                            {
+                                newChunk.HeightMapReady += decorator.OnHeightMapReady;
+                                newChunk.VisibilityChanged += decorator.OnChunkVisibilityChanged;
+                            }
+                        }
+
                         newChunk.Load();
                     }
                 }
