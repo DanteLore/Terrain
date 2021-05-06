@@ -495,15 +495,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
       propertyPath: movementSettings.StrafeSpeed
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
       propertyPath: movementSettings.ForwardSpeed
-      value: 16
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
       propertyPath: movementSettings.BackwardSpeed
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
       propertyPath: movementSettings.RunMultiplier
@@ -681,12 +681,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 459958, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
   m_PrefabInstance: {fileID: 825235356}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &868505374 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 474244, guid: 75283e9ef15245c4aab126ec6525dd2a, type: 3}
-  m_PrefabInstance: {fileID: 1617977869}
-  m_PrefabAsset: {fileID: 0}
---- !u!43 &1111233746
+--- !u!43 &848352939
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -850,6 +845,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &868505374 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 474244, guid: 75283e9ef15245c4aab126ec6525dd2a, type: 3}
+  m_PrefabInstance: {fileID: 1617977869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1329629377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905506758}
-  m_Mesh: {fileID: 1111233746}
+  m_Mesh: {fileID: 848352939}
 --- !u!4 &1905506762
 Transform:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class RockGenerator : ChunkDecorator
     {
         rocks = new Dictionary<Vector2, List<GameObject>>();
     }
-
+    
     public override void OnHeightMapReady(TerrainChunk chunk)
     {
         base.OnHeightMapReady(chunk);
@@ -29,9 +29,9 @@ public class RockGenerator : ChunkDecorator
 
         rocks[chunk.coord] = new List<GameObject>();
 
-        for(int y = rockSettings.gridStep; y < chunk.MapHeight; y += rockSettings.gridStep)
+        for(int y = rockSettings.gridStep / 2; y < chunk.MapHeight - 1; y += rockSettings.gridStep)
         {
-            for(int x = rockSettings.gridStep; x < chunk.MapWidth; x += rockSettings.gridStep)
+            for(int x = rockSettings.gridStep / 2; x < chunk.MapWidth - 1; x += rockSettings.gridStep)
             {  
                 float prob = (float)rand.NextDouble();
 
@@ -44,10 +44,23 @@ public class RockGenerator : ChunkDecorator
             }
         }
     }
+    private Vector3 SurfaceNormalFromPoints(Vector3 pointA, Vector3 pointB, Vector3 pointC)
+    {
+        Vector3 sideAB = pointB - pointA;
+        Vector3 sideAC = pointC - pointA;
+
+        return Vector3.Cross(sideAB, sideAC).normalized;
+    }
 
     private GameObject PlaceRock(TerrainChunk chunk, int x, int y, System.Random rand)
     {
-        Vector3 pos = chunk.MapToWorldPoint(x, y);
+        Vector3 p1 = chunk.MapToWorldPoint(x, y);
+        Vector3 p2 = chunk.MapToWorldPoint(x + 1, y);
+        Vector3 p3 = chunk.MapToWorldPoint(x, y + 1);
+        Vector3 normal = SurfaceNormalFromPoints(p1, p2, p3);
+
+        Vector3 pos = (p1 + p2 + p3) / 3; // Centre of triangle
+
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         var possibleRocks = rockSettings.rocks.Where(t => normHeight >= t.minHeight && normHeight <= t.maxHeight).ToList();
@@ -58,6 +71,11 @@ public class RockGenerator : ChunkDecorator
 
             GameObject rock = Instantiate(prefabs[rand.Next(prefabs.Count)]);
             rock.transform.SetParent(chunk.meshObject.transform);
+
+            // Rotate so it's flat on the ground and randomly around the y axis
+            var randomRotation = Quaternion.Euler(0, (float)rand.NextDouble() * 360, 0);
+            var layFlat = Quaternion.FromToRotation(transform.up, normal);
+            rock.transform.rotation = layFlat * rock.transform.rotation * randomRotation;
 
             rock.transform.position = pos + new Vector3(0f, -0.05f, 0f);
             rock.transform.localScale = Vector3.one * Mathf.Lerp(rockSettings.rockScale * 0.5f, rockSettings.rockScale * 1.5f, (float)rand.NextDouble());
