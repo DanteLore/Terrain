@@ -9,7 +9,13 @@ public class TreeSettings : ScriptableObject
     [Range(1, 16)]
     public int gridStep = 2;
 
-    public float placementProbability = 0.01f;
+    [Range(0, 1)]
+    public float placementThreshold = 0.2f;
+
+    public float noiseScale = 10.0f;
+
+    [Range(0, 1)]
+    public float noiseAmplitude = 0.1f;
 
     public TreeInfo[] trees;
 }

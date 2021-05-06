@@ -17,11 +17,17 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
     {
         trees[chunk.coord] = new List<GameObject>();
 
+        int i = 0;
         for(int y = treeSettings.gridStep; y < chunk.MapHeight; y += treeSettings.gridStep)
         {
             for(int x = treeSettings.gridStep; x < chunk.MapWidth; x += treeSettings.gridStep)
-            {               
-                if(Random.Range(0.0f, 1.0f) <= treeSettings.placementProbability)
+            {  
+                float scale = 1.0f / treeSettings.noiseScale;
+                Vector3 point = chunk.MapToWorldPoint(x, y);
+                float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
+                prob +=  Mathf.PerlinNoise(i++, 0f) * treeSettings.noiseAmplitude;
+
+                if(prob <= treeSettings.placementThreshold)
                 {
                     var tree = PlaceTree(chunk, x, y);
                     if(tree != null)
@@ -46,7 +52,9 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
         {
             var prefabs = possibleTrees.SelectMany(t => t.prefabs).ToList();
 
-            GameObject tree = Instantiate(prefabs[Random.Range(0, prefabs.Count)]);
+            int treeIndex = Mathf.RoundToInt(Mathf.Clamp01(Mathf.PerlinNoise(x, y)) * prefabs.Count);
+
+            GameObject tree = Instantiate(prefabs[treeIndex]);
             tree.transform.SetParent(chunk.meshObject.transform);
 
             tree.transform.position = pos + new Vector3(0f, -0.05f, 0f);
