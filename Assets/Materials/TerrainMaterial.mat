@@ -19,6 +19,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_e1f90655bd60494fb3652604ba202f3b:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_b30e22fd4f6e463b95732b1849715624_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 625130d763c1f4ac0b63adf09f4060db, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -37,6 +45,8 @@ Material:
     - Vector1_31d781842aee42c48a568980d2782fc5: 1
     - Vector1_55a62df8a2c245018dfec8f51284b693: -0.112
     - Vector1_9b661a7f8aa2419d9acfb8a011d9d3cc: 0
+    - Vector1_a6c17a46c6cc4c0aa53554b55154a48c: 0.403
+    - Vector1_c6ceb1ac0bca4393b10f4e2e9bab6880: 100
     - Vector1_d0b1be8367d44abbbdd155eb81aa308e: -10
     m_Colors:
     - Color_20082a35059e45cab41c08317b3492cc: {r: 0, g: 0.28511548, b: 1, a: 1}
