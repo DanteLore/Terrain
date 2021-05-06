@@ -5,7 +5,8 @@ public class TerrainChunk
 {
     public event System.Action<TerrainChunk, bool> VisibilityChanged;
     public event System.Action<TerrainChunk> HeightMapReady;
-    const float colliderGenerationDistanceThreashold = 5;
+    public event System.Action<TerrainChunk> ColliderSet;
+    const float colliderGenerationDistanceThreshold = 20;
 
     public Vector2 coord;
 
@@ -65,6 +66,17 @@ public class TerrainChunk
         get { return meshSettings.MeshWorldSize; }
     }
 
+    public bool HasSetCollider
+    {
+        get { return hasSetCollider; }
+        private set 
+        {
+            hasSetCollider = value;
+            if(ColliderSet != null)
+                ColliderSet(this);
+        }
+    }
+
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLodIndex, Transform parent, Transform viewer, Material material)
     {
         this.coord = coord;
@@ -78,7 +90,8 @@ public class TerrainChunk
         Vector2 position = coord * meshSettings.MeshWorldSize;
         bounds = new Bounds(position, Vector2.one * meshSettings.MeshWorldSize);
 
-        meshObject = new GameObject("Terrain Chunk");
+        meshObject = new GameObject("Terrain Chunk " + coord);
+        meshObject.layer = LayerMask.NameToLayer("Terrain");
         meshRenderer = meshObject.AddComponent<MeshRenderer>();
         meshFilter = meshObject.AddComponent<MeshFilter>();
         meshCollider = meshObject.AddComponent<MeshCollider>();
@@ -175,7 +188,7 @@ public class TerrainChunk
         if(!hasSetCollider)
         {
             float squareDistanceFromViewerToEdge = bounds.SqrDistance(ViewerPosition);
-            var colliderLodMesh = lodMeshes[colliderLodIndex];
+            LODMesh colliderLodMesh = lodMeshes[colliderLodIndex];
 
             if(squareDistanceFromViewerToEdge < detailLevels[colliderLodIndex].SqrVisibleDistanceThreshold)
             {
@@ -183,14 +196,16 @@ public class TerrainChunk
                     colliderLodMesh.RequestMesh(heightMap, meshSettings);
             }
 
-            if(squareDistanceFromViewerToEdge < colliderGenerationDistanceThreashold * colliderGenerationDistanceThreashold)
+            if(squareDistanceFromViewerToEdge < colliderGenerationDistanceThreshold * colliderGenerationDistanceThreshold)
             {
                 if(colliderLodMesh.hasMesh)
+                {
                     meshCollider.sharedMesh = colliderLodMesh.mesh;
+                    HasSetCollider = true;
+                }
             }
         }
     }
-
     public void SetVisible(bool visible)
     {
         meshObject.SetActive(visible);

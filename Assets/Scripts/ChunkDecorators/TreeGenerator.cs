@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class TreeGenerator : MonoBehaviour, IChunkDecorator
+public class TreeGenerator : ChunkDecorator
 {
     public TreeSettings treeSettings;
     private Dictionary<Vector2, List<GameObject>> trees;
@@ -13,11 +13,9 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
         trees = new Dictionary<Vector2, List<GameObject>>();
     }
 
-    public void OnHeightMapReady(TerrainChunk chunk)
+    public override void OnHeightMapReady(TerrainChunk chunk)
     {
         GenerateTrees(chunk);
-
-        OnChunkVisibilityChanged(chunk, chunk.IsVisible());
     }
 
     private void GenerateTrees(TerrainChunk chunk)
@@ -67,9 +65,5 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
         }
 
         return null;
-    }
-
-    public void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
-    {
     }
 }

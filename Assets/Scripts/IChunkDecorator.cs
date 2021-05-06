@@ -1,7 +1,28 @@
 using UnityEngine;
 public interface IChunkDecorator
-{
-    public void OnHeightMapReady(TerrainChunk chunk);
+{    
+    void HookEvents(TerrainChunk chunk);
+}
 
-    public void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible);
+public class ChunkDecorator : MonoBehaviour, IChunkDecorator
+{
+    public void HookEvents(TerrainChunk chunk)
+    {
+        chunk.HeightMapReady += OnHeightMapReady;
+        chunk.VisibilityChanged += OnChunkVisibilityChanged;
+        chunk.ColliderSet += OnColliderSet;
+    }
+
+    public virtual void OnHeightMapReady(TerrainChunk chunk) 
+    {
+
+    }
+    public virtual void OnColliderSet(TerrainChunk chunk) 
+    {
+
+    }
+    public virtual void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible) 
+    {
+
+    }
 }

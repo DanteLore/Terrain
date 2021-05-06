@@ -103,8 +103,7 @@ public class TerrainGenerator : MonoBehaviour
                         {
                             foreach(var decorator in chunkDecorators)
                             {
-                                newChunk.HeightMapReady += decorator.OnHeightMapReady;
-                                newChunk.VisibilityChanged += decorator.OnChunkVisibilityChanged;
+                                decorator.HookEvents(newChunk);
                             }
                         }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterDecorator : MonoBehaviour, IChunkDecorator
+public class WaterDecorator : ChunkDecorator
 {
     public float waterLevel = 0.01f;
 
@@ -16,19 +16,13 @@ public class WaterDecorator : MonoBehaviour, IChunkDecorator
         waterGameObjects = new Dictionary<Vector2, GameObject>();
     }
 
-    public void OnHeightMapReady(TerrainChunk chunk)
+    public override void OnHeightMapReady(TerrainChunk chunk)
     {
         if(chunk.MinLocalHeight < waterLevel)
         {
             AddPlane(chunk);
         }
     }
-
-    public void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
-    {
-        // Nothing to do here
-    }
-
     private void AddPlane(TerrainChunk chunk)
     {
         if(!waterGameObjects.ContainsKey(chunk.coord))
