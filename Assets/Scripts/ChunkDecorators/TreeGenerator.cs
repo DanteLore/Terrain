@@ -15,9 +15,17 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
 
     public void OnHeightMapReady(TerrainChunk chunk)
     {
+        GenerateTrees(chunk);
+
+        OnChunkVisibilityChanged(chunk, chunk.IsVisible());
+    }
+
+    private void GenerateTrees(TerrainChunk chunk)
+    {
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000000 + chunk.coord.x));
+
         trees[chunk.coord] = new List<GameObject>();
 
-        int i = 0;
         for(int y = treeSettings.gridStep; y < chunk.MapHeight; y += treeSettings.gridStep)
         {
             for(int x = treeSettings.gridStep; x < chunk.MapWidth; x += treeSettings.gridStep)
@@ -25,23 +33,19 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
                 float scale = 1.0f / treeSettings.noiseScale;
                 Vector3 point = chunk.MapToWorldPoint(x, y);
                 float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
-                prob +=  Mathf.PerlinNoise(i++, 0f) * treeSettings.noiseAmplitude;
+                prob +=  Mathf.Lerp(-treeSettings.noiseAmplitude, treeSettings.noiseAmplitude, (float)rand.NextDouble());
 
                 if(prob <= treeSettings.placementThreshold)
                 {
-                    var tree = PlaceTree(chunk, x, y);
+                    var tree = PlaceTree(chunk, x, y, rand);
                     if(tree != null)
                         trees[chunk.coord].Add(tree);
                 }
             }
         }
-
-        //Debug.Log("Tile has " + trees[chunk.coord].Count + " trees");
-
-        OnChunkVisibilityChanged(chunk, chunk.IsVisible());
     }
 
-    private GameObject PlaceTree(TerrainChunk chunk, int x, int y)
+    private GameObject PlaceTree(TerrainChunk chunk, int x, int y, System.Random rand)
     {
         Vector3 pos = chunk.MapToWorldPoint(x, y);
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
@@ -52,14 +56,12 @@ public class TreeGenerator : MonoBehaviour, IChunkDecorator
         {
             var prefabs = possibleTrees.SelectMany(t => t.prefabs).ToList();
 
-            int treeIndex = Mathf.RoundToInt(Mathf.Clamp01(Mathf.PerlinNoise(x, y)) * prefabs.Count);
-
-            GameObject tree = Instantiate(prefabs[treeIndex]);
+            GameObject tree = Instantiate(prefabs[rand.Next(prefabs.Count)]);
             tree.transform.SetParent(chunk.meshObject.transform);
 
             tree.transform.position = pos + new Vector3(0f, -0.05f, 0f);
-            tree.transform.localScale = Vector3.one * Random.Range(0.75f, 1.25f);
-            tree.transform.eulerAngles = new Vector3(Random.Range(0f, 5f), Random.Range(0f, 360f), Random.Range(0f, 5f));
+            tree.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 1.25f, (float)rand.NextDouble());
+            tree.transform.eulerAngles = new Vector3(Mathf.Lerp(0f, 5f, (float)rand.NextDouble()), Mathf.Lerp(0f, 360f, (float)rand.NextDouble()), Mathf.Lerp(0f, 5f, (float)rand.NextDouble()));
 
             return tree;
         }
