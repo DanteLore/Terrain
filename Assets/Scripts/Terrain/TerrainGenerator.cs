@@ -13,6 +13,7 @@ public class TerrainGenerator : MonoBehaviour
     public LODInfo[] detailLevels;
 
     public MeshSettings meshSettings;
+
     public HeightMapSettings heightMapSettings;
 
     public Material mapMaterial;
@@ -28,6 +29,11 @@ public class TerrainGenerator : MonoBehaviour
     private static List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
 
     private List<IChunkDecorator> chunkDecorators;
+
+    public Vector2 GameToMapPos(Vector3 position)
+    {
+        return new Vector2(position.x / meshSettings.meshScale, position.z / meshSettings.meshScale);
+    }
 
     public void Awake()
     {
