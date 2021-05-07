@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using System.Linq;
 
 public class GameController : MonoBehaviour
 {
@@ -23,8 +24,9 @@ public class GameController : MonoBehaviour
 
     private bool inMenu = false;
 
-    void Start()
+    void Awake()
     {
+        SetIsFullscreen(false);
         playerController = player.GetComponent<RigidbodyFirstPersonController>();
         mouseLook = playerController.mouseLook;
     }
@@ -34,11 +36,7 @@ public class GameController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             inMenu = !inMenu;
-            mouseLook.SetCursorLock(!inMenu);
-            mouseLook.UpdateCursorLock();
-            playerController.enabled = !inMenu;
-            menuObject.SetActive(inMenu);
-            hudObject.SetActive(!inMenu);
+            SetMenuVisible(inMenu);
         }
 
         // Emergency use only :)
@@ -48,6 +46,16 @@ public class GameController : MonoBehaviour
         }
             
         UpdateHud();
+    }
+
+    private void SetMenuVisible(bool showMenu)
+    {
+        inMenu = showMenu;
+        mouseLook.SetCursorLock(!showMenu);
+        mouseLook.UpdateCursorLock();
+        playerController.enabled = !showMenu;
+        menuObject.SetActive(showMenu);
+        hudObject.SetActive(!showMenu);
     }
 
     private void UpdateHud()
@@ -63,5 +71,17 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Bye bye!");
         Application.Quit();
+    }
+
+    public void Resume()
+    {
+        SetMenuVisible(false);
+    }
+
+    public void SetIsFullscreen(bool fullscreen)
+    {
+        Resolution res = fullscreen ? Screen.resolutions.Last() : Screen.resolutions.First(r => r.width == 1024);
+    
+        Screen.SetResolution(res.width, res.height, fullscreen);
     }
 }
