@@ -14,10 +14,10 @@ public class TerrainGenerator : MonoBehaviour
 
     public MeshSettings meshSettings;
     public HeightMapSettings heightMapSettings;
-    public TextureData textureSettings;
+
+    public Material mapMaterial;
 
     public Transform viewer;
-    public Material mapMaterial;
 
     private Vector2 viewerPosition;
     private Vector2 viewerPositionOld;
@@ -36,9 +36,6 @@ public class TerrainGenerator : MonoBehaviour
 
     public void Start()
     {
-        textureSettings.ApplyToMaterial(mapMaterial);
-        textureSettings.UpdateMeshHeights(mapMaterial, heightMapSettings.MinHeight, heightMapSettings.MaxHeight);
-
         float maxViewDistance = detailLevels[detailLevels.Length - 1].visibleDistanceThreshold;
         meshWorldSize = meshSettings.MeshWorldSize;
         chunksVisibleInViewDistance = Mathf.RoundToInt(maxViewDistance / meshWorldSize);
