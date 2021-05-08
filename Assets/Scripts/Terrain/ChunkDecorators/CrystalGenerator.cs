@@ -104,6 +104,8 @@ public class CrystalGenerator : ChunkDecorator
         GameObject prefab = crystalSettings.prefabs[index];
         GameObject crystal = Instantiate(prefab);
         crystal.transform.SetParent(chunk.meshObject.transform);
+        crystal.layer = LayerMask.NameToLayer("Crystals");
+        crystal.name = "Crystal on chunk " + chunk.coord + " at: " + pos;
 
         var randomRotation = Quaternion.Euler((float)rand.NextDouble() * crystalSettings.maxTiltAngle, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * crystalSettings.maxTiltAngle);
         var layFlat = Quaternion.FromToRotation(transform.up, normal);

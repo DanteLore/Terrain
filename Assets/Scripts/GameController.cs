@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public Text compassText;
 
     public Text crosshairText;
+    public Text messageText;
 
     private bool inMenu = false;
 
@@ -43,14 +44,16 @@ public class GameController : MonoBehaviour
 
         if(crosshairText)
             crosshairText.text = "҉";
+
+        if(messageText)
+            messageText.text = "";
     }
-    
+
     private void OnPlayerTargetChanged(PlayerController controller, Collider target)
     {
         crosshairText.color = (target == null) ? Color.white : Color.red;
 
-        if(target != null)
-            Debug.Log(target.name);
+        messageText.text = (target != null) ? target.name : "";    
     }
 
     void Update()

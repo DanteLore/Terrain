@@ -100,6 +100,8 @@ public class FlowerGenerator : ChunkDecorator
 
         GameObject flower = Instantiate(cluster.prefab);
         flower.transform.SetParent(chunk.meshObject.transform);
+        flower.layer = LayerMask.NameToLayer("Flowers");
+        flower.name = "Flower on chunk " + chunk.coord + " at: " + pos;
 
         var randomRotation = Quaternion.Euler((float)rand.NextDouble() * flowerSettings.maxTiltAngle, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * flowerSettings.maxTiltAngle);
         flower.transform.rotation = flower.transform.rotation * randomRotation;
