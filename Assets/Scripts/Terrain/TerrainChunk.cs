@@ -6,6 +6,7 @@ public class TerrainChunk
     public event System.Action<TerrainChunk, bool> VisibilityChanged;
     public event System.Action<TerrainChunk> HeightMapReady;
     public event System.Action<TerrainChunk> ColliderSet;
+    public event System.Action<TerrainChunk, int> LodChange;
     const float colliderGenerationDistanceThreshold = 20;
 
     public Vector2 coord;
@@ -173,6 +174,9 @@ public class TerrainChunk
                     {
                         lodMesh.RequestMesh(heightMap, meshSettings);
                     }
+
+                    if(LodChange != null)
+                        LodChange(this, lodIndex);
                 }
             }
 

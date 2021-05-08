@@ -24,9 +24,10 @@ public class GameController : MonoBehaviour
 
     private bool inMenu = false;
 
-    void Awake()
+    void Start()
     {
         SetIsFullscreen(false);
+        hudObject.SetActive(true);
         playerController = player.GetComponent<RigidbodyFirstPersonController>();
         mouseLook = playerController.mouseLook;
     }
