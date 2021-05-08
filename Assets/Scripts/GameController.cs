@@ -30,6 +30,11 @@ public class GameController : MonoBehaviour
 
     private bool inMenu = false;
 
+    private const string activeCrosshairChar = "҉";
+    private const string normalCrosshairChar = "҈";
+
+    private const string compassArrowChar = "Λ"; // "†"; // "Ѧ";
+
     void Start()
     {
         SetIsFullscreen(false);
@@ -40,10 +45,10 @@ public class GameController : MonoBehaviour
         mouseLook = firstPersonController.mouseLook;
 
         if(compassText)  
-           compassText.text = "Λ"; // "†"; // "Ѧ";
+           compassText.text = compassArrowChar;
 
         if(crosshairText)
-            crosshairText.text = "҉";
+            crosshairText.text = normalCrosshairChar;
 
         if(messageText)
             messageText.text = "";
@@ -51,7 +56,16 @@ public class GameController : MonoBehaviour
 
     private void OnPlayerTargetChanged(PlayerController controller, Collider target)
     {
-        crosshairText.color = (target == null) ? Color.white : Color.red;
+        if(target == null)
+        {
+            crosshairText.color = Color.white;
+            crosshairText.text = normalCrosshairChar;
+        }
+        else
+        {
+            crosshairText.color = Color.red;
+            crosshairText.text = activeCrosshairChar;
+        }
 
         messageText.text = (target != null) ? target.name : "";    
     }
