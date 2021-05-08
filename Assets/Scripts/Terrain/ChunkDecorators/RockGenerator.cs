@@ -64,6 +64,8 @@ public class RockGenerator : ChunkDecorator
 
             GameObject rock = Instantiate(prefabs[rand.Next(prefabs.Count)]);
             rock.transform.SetParent(chunk.meshObject.transform);
+            rock.layer = LayerMask.NameToLayer("Rocks");
+            rock.name = "Rock on chunk " + chunk.coord + " at: " + pos;
 
             // Rotate so it's flat on the ground and randomly around the y axis
             var randomRotation = Quaternion.Euler(0, (float)rand.NextDouble() * 360, 0);

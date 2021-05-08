@@ -14,7 +14,8 @@ public class GameController : MonoBehaviour
     public Text headingText;
     public TerrainGenerator terrainGenerator; 
 
-    RigidbodyFirstPersonController playerController;
+    private RigidbodyFirstPersonController firstPersonController;
+    private PlayerController playerController;
     MouseLook mouseLook;
 
     public GameObject player;
@@ -32,14 +33,24 @@ public class GameController : MonoBehaviour
     {
         SetIsFullscreen(false);
         hudObject.SetActive(true);
-        playerController = player.GetComponent<RigidbodyFirstPersonController>();
-        mouseLook = playerController.mouseLook;
+        firstPersonController = player.GetComponent<RigidbodyFirstPersonController>();
+        playerController = player.GetComponent<PlayerController>();
+        playerController.TargetChanged += OnPlayerTargetChanged;
+        mouseLook = firstPersonController.mouseLook;
 
         if(compassText)  
            compassText.text = "Λ"; // "†"; // "Ѧ";
 
         if(crosshairText)
             crosshairText.text = "҉";
+    }
+    
+    private void OnPlayerTargetChanged(PlayerController controller, Collider target)
+    {
+        crosshairText.color = (target == null) ? Color.white : Color.red;
+
+        if(target != null)
+            Debug.Log(target.name);
     }
 
     void Update()
@@ -55,7 +66,7 @@ public class GameController : MonoBehaviour
         {
             Debug.Break();
         }
-            
+
         UpdateHud();
     }
 
@@ -64,7 +75,7 @@ public class GameController : MonoBehaviour
         inMenu = showMenu;
         mouseLook.SetCursorLock(!showMenu);
         mouseLook.UpdateCursorLock();
-        playerController.enabled = !showMenu;
+        firstPersonController.enabled = !showMenu;
         menuObject.SetActive(showMenu);
         hudObject.SetActive(!showMenu);
     }
