@@ -51,7 +51,6 @@ public class FlowerGenerator : ChunkDecorator
                 int centerY = r + rand.Next(chunk.MapHeight - r * 2);
 
                 int index = rand.Next(flowerSettings.prefabs.Length);
-                Debug.Log(index);
                 GameObject prefab = flowerSettings.prefabs[index];
 
                 chunkClusters.Add(new FlowerCluster(centerX, centerY, radius, prefab));

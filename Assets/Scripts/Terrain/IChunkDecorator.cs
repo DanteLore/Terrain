@@ -29,6 +29,14 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 
     public virtual void OnLodChange(TerrainChunk chunk, int lod)
     {
-        
+
+    }
+
+    protected Vector3 SurfaceNormalFromPoints(Vector3 pointA, Vector3 pointB, Vector3 pointC)
+    {
+        Vector3 sideAB = pointB - pointA;
+        Vector3 sideAC = pointC - pointA;
+
+        return Vector3.Cross(sideAB, sideAC).normalized;
     }
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0256a1ad2710486a9bc3b778310a566, type: 3}
+  m_Name: DefaultCrystalSettings
+  m_EditorClassIdentifier: 
+  gridStep: 1
+  placementThreshold: 0.2
+  crystalScale: 1
+  prefabs:
+  - {fileID: 1090798152727774444, guid: 0db8b612aee8f42f89436991e0fd503a, type: 3}
+  - {fileID: 8951510529616511241, guid: 228237ccab6064034a19237285932005, type: 3}
+  - {fileID: 4502692364093819982, guid: cecbe7f22c9f34ad3a0653163d332966, type: 3}
+  - {fileID: 5798694465683978382, guid: ee5f3e087a77b4203889f89f47516215, type: 3}
+  minHeight: 0.8
+  maxHeight: 0.9
+  lodIndex: 0
+  maxClustersPerChunk: 2
+  minClusterRadius: 1
+  maxClusterRadius: 5
+  maxTiltAngle: 10
