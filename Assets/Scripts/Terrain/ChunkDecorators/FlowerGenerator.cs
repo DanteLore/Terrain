@@ -27,7 +27,7 @@ public class FlowerGenerator : ChunkDecorator
             }
             else
             {
-                System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000 + chunk.coord.x));
+                System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
                 GenerateClusterCenters(chunk, rand);
                 GenerateFlowers(chunk, rand);
             }

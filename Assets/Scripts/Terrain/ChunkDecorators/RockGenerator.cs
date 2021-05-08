@@ -25,7 +25,7 @@ public class RockGenerator : ChunkDecorator
 
     private void GenerateRocks(TerrainChunk chunk)
     {
-        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000000 + chunk.coord.x));
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
 
         rocks[chunk.coord] = new List<GameObject>();
 
@@ -43,13 +43,6 @@ public class RockGenerator : ChunkDecorator
                 }
             }
         }
-    }
-    private Vector3 SurfaceNormalFromPoints(Vector3 pointA, Vector3 pointB, Vector3 pointC)
-    {
-        Vector3 sideAB = pointB - pointA;
-        Vector3 sideAC = pointC - pointA;
-
-        return Vector3.Cross(sideAB, sideAC).normalized;
     }
 
     private GameObject PlaceRock(TerrainChunk chunk, int x, int y, System.Random rand)

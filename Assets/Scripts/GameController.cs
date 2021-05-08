@@ -22,6 +22,10 @@ public class GameController : MonoBehaviour
     public GameObject menuObject;
     public GameObject hudObject;
 
+    public Text compassText;
+
+    public Text crosshairText;
+
     private bool inMenu = false;
 
     void Start()
@@ -30,6 +34,12 @@ public class GameController : MonoBehaviour
         hudObject.SetActive(true);
         playerController = player.GetComponent<RigidbodyFirstPersonController>();
         mouseLook = playerController.mouseLook;
+
+        if(compassText)  
+           compassText.text = "Λ"; // "†"; // "Ѧ";
+
+        if(crosshairText)
+            crosshairText.text = "҉";
     }
 
     void Update()
@@ -64,8 +74,10 @@ public class GameController : MonoBehaviour
         Vector2 pos = terrainGenerator.GameToMapPos(player.transform.position);
         float heading =  player.transform.rotation.eulerAngles.y;
 
-        worldPosText.text = string.Format("X: {0:0.0} Z: {1:0.0}", pos.x, pos.y);
+        worldPosText.text = string.Format("X: {0:0} Z: {1:0}", pos.x, pos.y);
         headingText.text = string.Format("{0:0}°", heading);
+        
+        compassText.transform.localRotation = Quaternion.Euler(0, 0, -heading);
     }
 
     public void Quit()

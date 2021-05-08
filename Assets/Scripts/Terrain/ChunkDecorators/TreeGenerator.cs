@@ -20,7 +20,7 @@ public class TreeGenerator : ChunkDecorator
 
     private void GenerateTrees(TerrainChunk chunk)
     {
-        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000000 + chunk.coord.x));
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
 
         trees[chunk.coord] = new List<GameObject>();
 
