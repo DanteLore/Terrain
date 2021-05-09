@@ -5,7 +5,8 @@ using System.Linq;
 
 public class TreeGenerator : ChunkDecorator
 {
-    public TreeSettings treeSettings;
+    [Range(1, 16)]
+    public int gridStep = 6;
     private Dictionary<Vector2, List<GameObject>> trees;
 
     private void Start()
@@ -24,12 +25,13 @@ public class TreeGenerator : ChunkDecorator
 
         trees[chunk.coord] = new List<GameObject>();
 
-        for(int y = treeSettings.gridStep; y < chunk.MapHeight; y += treeSettings.gridStep)
+        for(int y = gridStep; y < chunk.MapHeight; y += gridStep)
         {
-            for(int x = treeSettings.gridStep; x < chunk.MapWidth; x += treeSettings.gridStep)
+            for(int x = gridStep; x < chunk.MapWidth; x += gridStep)
             {  
-                float scale = 1.0f / treeSettings.noiseScale;
                 Vector3 point = chunk.MapToWorldPoint(x, y);
+                TreeSettings treeSettings = chunk.NearestBiome(point).settings.treeSettings;
+                float scale = 1.0f / treeSettings.noiseScale;
                 float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
                 prob +=  Mathf.Lerp(-treeSettings.noiseAmplitude, treeSettings.noiseAmplitude, (float)rand.NextDouble());
 
@@ -46,6 +48,7 @@ public class TreeGenerator : ChunkDecorator
     private GameObject PlaceTree(TerrainChunk chunk, int x, int y, System.Random rand)
     {
         Vector3 pos = chunk.MapToWorldPoint(x, y);
+        TreeSettings treeSettings = chunk.NearestBiome(pos).settings.treeSettings;
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         var possibleTrees = treeSettings.trees.Where(t => normHeight >= t.minHeight && normHeight <= t.maxHeight).ToList();

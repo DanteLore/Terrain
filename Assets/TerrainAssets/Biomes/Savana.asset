@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28fb509c941cb42069d879fe9705b60c, type: 3}
-  m_Name: BirchWoodland
+  m_Name: Savana
   m_EditorClassIdentifier: 
-  treeSettings: {fileID: 11400000, guid: e85f5f1b4769d44249d8a0fbf7468850, type: 2}
+  treeSettings: {fileID: 11400000, guid: 7d8b88f2f0ffd4bbe9cec6d3304e9eaa, type: 2}

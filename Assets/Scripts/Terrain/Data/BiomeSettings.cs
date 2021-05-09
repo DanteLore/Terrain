@@ -6,5 +6,5 @@ using System;
 [CreateAssetMenu]
 public class BiomeSettings : ScriptableObject
 {
-
+    public TreeSettings treeSettings;
 }

@@ -67,11 +67,18 @@ public class GameController : MonoBehaviour
             crosshairText.text = activeCrosshairChar;
         }
         if(target != null)
+        {
             messageText.text = target.name;
+        }
         else if(playerController.CurrentChunk != null)
-            messageText.text = "Chunk: " + playerController.CurrentChunk.coord;
+        {
+            Biome biome = playerController.CurrentChunk.NearestBiome(player.transform.position);
+            messageText.text = (biome != null) ? "Biome: " + biome : "";
+        }
         else
+        {
             messageText.text = "";
+        }
     }
 
     void Update()

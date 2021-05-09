@@ -38,11 +38,7 @@ public class TerrainGenerator : MonoBehaviour
     public TerrainChunk GetChunkForPosition(Vector3 pos)
     {
         Vector2 mapPos = GameToMapPos(pos);
-
         Vector2 chunkCoord = new Vector2(Mathf.Round(mapPos.x / meshSettings.ChunkSize), Mathf.Round(mapPos.y / meshSettings.ChunkSize));
-
-        Debug.Log(pos + " => (" + mapPos + " / " + meshSettings.ChunkSize + ") => " + chunkCoord);
-
         return terrainChunkDictionary.ContainsKey(chunkCoord) ? terrainChunkDictionary[chunkCoord] : null;
     }
 

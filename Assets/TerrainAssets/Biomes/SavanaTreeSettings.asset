@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
+  m_Name: SavanaTreeSettings
+  m_EditorClassIdentifier: 
+  placementThreshold: 0.05
+  noiseScale: 5
+  noiseAmplitude: 0.1
+  trees:
+  - name: Plains Trees
+    prefabs:
+    - {fileID: 143020, guid: aee731a00031fcc4d9d2b075e528e050, type: 3}
+    - {fileID: 138344, guid: 8a7cf5ac7b4145441a3dca86f869b09e, type: 3}
+    - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
+    - {fileID: 151190, guid: a9cc5585b9634a9449920c03ec6bc243, type: 3}
+    minHeight: 0.07
+    maxHeight: 0.4
+  - name: Dead Trees
+    prefabs:
+    - {fileID: 160606, guid: 5c3cbac9d5eae3844a928d36e6dbd1a6, type: 3}
+    minHeight: 0.6
+    maxHeight: 0.65
+  - name: High Trees
+    prefabs:
+    - {fileID: 111494, guid: 62724a8cd2495b14f930b7129c3bc47b, type: 3}
+    - {fileID: 188972, guid: 7641c7e8354e2c44cab6432d9d2c6d1b, type: 3}
+    - {fileID: 182406, guid: a1d34f7914a1d8148a0ce7262f7ba394, type: 3}
+    - {fileID: 115084, guid: 7c5aafe3fe2c6ef4a9150f7f44653760, type: 3}
+    - {fileID: 127550, guid: 87a6cef862ce2cb4a88c5ca5d5af5d2b, type: 3}
+    minHeight: 0.3
+    maxHeight: 0.7

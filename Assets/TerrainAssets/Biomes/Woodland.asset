@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28fb509c941cb42069d879fe9705b60c, type: 3}
   m_Name: Woodland
   m_EditorClassIdentifier: 
-  name: Woodland
+  treeSettings: {fileID: 11400000, guid: 7ebcff74e8809490fa97b2f63463aefb, type: 2}

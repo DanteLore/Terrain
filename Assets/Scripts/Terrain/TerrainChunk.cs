@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class TerrainChunk
 {
@@ -119,6 +120,33 @@ public class TerrainChunk
         }
 
         maxViewDistance = detailLevels[detailLevels.Length - 1].visibleDistanceThreshold;
+    }
+
+    public Biome NearestBiome(Vector3 position)
+    {
+        Vector2 pos2D = new Vector2(position.x, position.z);
+
+        if(biomes == null || !biomes.Any())
+            return null;
+        else if(biomes.Count == 1)
+            return biomes[0];
+        else
+        {
+            float bestDist = (pos2D - biomes[0].biomeCoords).sqrMagnitude;
+            Biome best = biomes[0];
+            
+            foreach(Biome b in biomes.Skip(1))
+            {
+                float dist = (pos2D - biomes[0].biomeCoords).sqrMagnitude;
+                if(dist < bestDist)
+                {
+                    bestDist = dist;
+                    best = b;
+                }
+            }
+
+            return best;
+        }
     }
 
     public void Load()

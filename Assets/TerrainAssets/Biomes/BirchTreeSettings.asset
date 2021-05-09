@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
+  m_Name: BirchTreeSettings
+  m_EditorClassIdentifier: 
+  placementThreshold: 0.15
+  noiseScale: 50
+  noiseAmplitude: 0.5
+  trees:
+  - name: 
+    prefabs:
+    - {fileID: 188992, guid: 11d469914a0208343b39f04223416f9c, type: 3}
+    - {fileID: 147220, guid: 446fc4730aadcd04985c8dafaaf0c501, type: 3}
+    - {fileID: 112728, guid: 069e1e44b643edc4fb4a9d4311a78fb7, type: 3}
+    - {fileID: 151792, guid: 1e4e7284c1efd5f4eb702c799353072c, type: 3}
+    minHeight: 0.08
+    maxHeight: 0.35
