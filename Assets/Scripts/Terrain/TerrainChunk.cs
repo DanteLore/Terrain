@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TerrainChunk
 {
@@ -33,6 +36,8 @@ public class TerrainChunk
     private HeightMapSettings heightMapSettings;
     private MeshSettings meshSettings;
     private Transform viewer;
+
+    List<Biome> biomes;
 
     public int MapHeight
     {
@@ -87,6 +92,8 @@ public class TerrainChunk
         this.colliderLodIndex = colliderLodIndex;
         this.viewer = viewer;
 
+        this.biomes = new List<Biome>();
+
         sampleCenter = coord * meshSettings.MeshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.MeshWorldSize;
         bounds = new Bounds(position, Vector2.one * meshSettings.MeshWorldSize);
@@ -138,6 +145,11 @@ public class TerrainChunk
             HeightMapReady(this);
 
         UpdateTerrainChunk();
+    }
+
+    public void AddBiomes(IEnumerable<Biome> newBiomes)
+    {
+        biomes = biomes.Union(newBiomes).ToList();
     }
 
     private Vector2 ViewerPosition { get { return new Vector2(viewer.position.x, viewer.position.z); }}

@@ -20,7 +20,7 @@ public class TreeGenerator : ChunkDecorator
 
     private void GenerateTrees(TerrainChunk chunk)
     {
-        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000000 + chunk.coord.x));
 
         trees[chunk.coord] = new List<GameObject>();
 
@@ -55,8 +55,6 @@ public class TreeGenerator : ChunkDecorator
             var prefabs = possibleTrees.SelectMany(t => t.prefabs).ToList();
 
             GameObject tree = Instantiate(prefabs[rand.Next(prefabs.Count)]);
-            tree.layer = LayerMask.NameToLayer("Trees");
-            tree.name = "Tree on chunk " + chunk.coord + " at: " + pos;
             tree.transform.SetParent(chunk.meshObject.transform);
 
             tree.transform.position = pos + new Vector3(0f, -0.05f, 0f);

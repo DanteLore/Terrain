@@ -20,6 +20,11 @@ public class MeshSettings : UpdatableData
     public int NumberOfVerticesPerLine{
         get { return supportedChunkSizes[useFlatShading ? flatShadedChunkSizeIndex : chunkSizeIndex] + 5; }
     }
+
+    public int ChunkSize {
+        get { return supportedChunkSizes[useFlatShading ? flatShadedChunkSizeIndex : chunkSizeIndex] + 2; }
+    }
+    
     public float MeshWorldSize {
         get { return (NumberOfVerticesPerLine - 3) * meshScale; }
     }

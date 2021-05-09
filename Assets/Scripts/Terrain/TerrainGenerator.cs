@@ -35,6 +35,17 @@ public class TerrainGenerator : MonoBehaviour
         return new Vector2(position.x / meshSettings.meshScale, position.z / meshSettings.meshScale);
     }
 
+    public TerrainChunk GetChunkForPosition(Vector3 pos)
+    {
+        Vector2 mapPos = GameToMapPos(pos);
+
+        Vector2 chunkCoord = new Vector2(Mathf.Round(mapPos.x / meshSettings.ChunkSize), Mathf.Round(mapPos.y / meshSettings.ChunkSize));
+
+        Debug.Log(pos + " => (" + mapPos + " / " + meshSettings.ChunkSize + ") => " + chunkCoord);
+
+        return terrainChunkDictionary.ContainsKey(chunkCoord) ? terrainChunkDictionary[chunkCoord] : null;
+    }
+
     public void Awake()
     {
         chunkDecorators = GetComponents<IChunkDecorator>().ToList();

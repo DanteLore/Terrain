@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {    
     public event System.Action<PlayerController, Collider> TargetChanged;
 
+    public TerrainGenerator terrainGenerator;
+
     public float maxTargetRange = 20f;
 
     private Collider _target;
@@ -18,6 +20,14 @@ public class PlayerController : MonoBehaviour
 
             if(TargetChanged != null)
                 TargetChanged(this, _target);
+        }
+    }
+
+    public TerrainChunk CurrentChunk
+    {
+        get 
+        {
+            return terrainGenerator.GetChunkForPosition(transform.position);
         }
     }
 

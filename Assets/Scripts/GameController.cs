@@ -66,8 +66,12 @@ public class GameController : MonoBehaviour
             crosshairText.color = Color.red;
             crosshairText.text = activeCrosshairChar;
         }
-
-        messageText.text = (target != null) ? target.name : "";    
+        if(target != null)
+            messageText.text = target.name;
+        else if(playerController.CurrentChunk != null)
+            messageText.text = "Chunk: " + playerController.CurrentChunk.coord;
+        else
+            messageText.text = "";
     }
 
     void Update()
