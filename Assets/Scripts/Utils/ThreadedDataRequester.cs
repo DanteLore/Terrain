@@ -33,7 +33,7 @@ public class ThreadedDataRequester : MonoBehaviour
 
     void Update() 
     {
-        while(dataQueue.Count > 0)
+        if(dataQueue.Count > 0) // Dequeue one per frame
         {
             var threadInfo = dataQueue.Dequeue();
             threadInfo.callback(threadInfo.parameter);

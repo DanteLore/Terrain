@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
   m_Name: BirchTreeSettings
   m_EditorClassIdentifier: 
-  placementThreshold: 0.15
+  placementThreshold: 0.2
   noiseScale: 50
-  noiseAmplitude: 0.5
+  noiseAmplitude: 0.2
   trees:
   - name: 
     prefabs:

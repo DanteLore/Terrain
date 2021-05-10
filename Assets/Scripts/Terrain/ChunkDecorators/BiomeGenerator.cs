@@ -47,7 +47,6 @@ public class BiomeGenerator : ChunkDecorator
         var sorted = biomes.OrderBy(b => (b.biomeCoords - chunk.sampleCenter).sqrMagnitude);
         var closeOnes = sorted.Take(1).Union(sorted.TakeWhile(b => (b.biomeCoords - chunk.sampleCenter).sqrMagnitude < threshold));
         
-        Debug.Log(closeOnes.Count());
         chunk.AddBiomes(closeOnes);
     }
 

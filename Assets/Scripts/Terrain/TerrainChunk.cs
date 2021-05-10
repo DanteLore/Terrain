@@ -148,6 +148,31 @@ public class TerrainChunk
             return best;
         }
     }
+    
+    public Biome BlendedBiome(Vector3 position, System.Random rand = null, float blendLimit = 50)
+    {
+        if(biomes == null || !biomes.Any())
+            return null;
+        else if(biomes.Count == 1)
+            return biomes[0];
+        else
+        {
+            if(rand == null)
+                rand = new System.Random();
+
+            Vector2 pos = new Vector2(position.x, position.z);
+
+            var distances = biomes.Select(b => ((b.biomeCoords - pos).sqrMagnitude, b));
+            var sorted = distances.OrderBy(x => x.Item1);
+            float minDistance = sorted.Select(x => x.Item1).First();
+            var withDistance = sorted.Select(x => (Mathf.Abs(x.Item1 - minDistance), x.Item2));
+            var closeOnes = withDistance.Where(x => x.Item1 <= blendLimit * blendLimit);
+
+            List<Biome> result = closeOnes.Select(x => x.Item2).ToList();
+
+            return result[rand.Next(result.Count)];
+        }
+    }
 
     public void Load()
     {

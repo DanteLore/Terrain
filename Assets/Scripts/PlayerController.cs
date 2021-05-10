@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        transform.position = new Vector3(0, 200, 0);
+    }
+
     void Update()
     {
         EmergencyFallPrevention();

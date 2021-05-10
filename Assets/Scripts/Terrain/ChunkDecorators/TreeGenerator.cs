@@ -25,19 +25,19 @@ public class TreeGenerator : ChunkDecorator
 
         trees[chunk.coord] = new List<GameObject>();
 
-        for(int y = gridStep; y < chunk.MapHeight; y += gridStep)
+        for(int y = 0; y <= chunk.MapHeight; y += gridStep)
         {
-            for(int x = gridStep; x < chunk.MapWidth; x += gridStep)
+            for(int x = 0; x <= chunk.MapWidth; x += gridStep)
             {  
                 Vector3 point = chunk.MapToWorldPoint(x, y);
-                TreeSettings treeSettings = chunk.NearestBiome(point).settings.treeSettings;
+                TreeSettings treeSettings = chunk.BlendedBiome(point, rand).settings.treeSettings;
                 float scale = 1.0f / treeSettings.noiseScale;
                 float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
                 prob +=  Mathf.Lerp(-treeSettings.noiseAmplitude, treeSettings.noiseAmplitude, (float)rand.NextDouble());
 
                 if(prob <= treeSettings.placementThreshold)
                 {
-                    var tree = PlaceTree(chunk, x, y, rand);
+                    var tree = PlaceTree(chunk, x, y, rand, treeSettings);
                     if(tree != null)
                         trees[chunk.coord].Add(tree);
                 }
@@ -45,10 +45,9 @@ public class TreeGenerator : ChunkDecorator
         }
     }
 
-    private GameObject PlaceTree(TerrainChunk chunk, int x, int y, System.Random rand)
+    private GameObject PlaceTree(TerrainChunk chunk, int x, int y, System.Random rand, TreeSettings treeSettings)
     {
         Vector3 pos = chunk.MapToWorldPoint(x, y);
-        TreeSettings treeSettings = chunk.NearestBiome(pos).settings.treeSettings;
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         var possibleTrees = treeSettings.trees.Where(t => normHeight >= t.minHeight && normHeight <= t.maxHeight).ToList();
