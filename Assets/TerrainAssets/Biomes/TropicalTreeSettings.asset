@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
   m_Name: TropicalTreeSettings
   m_EditorClassIdentifier: 
-  placementThreshold: 0.2
-  noiseScale: 10
+  placementThreshold: 0.3
+  noiseScale: 30
   noiseAmplitude: 0.1
   trees:
   - name: Palms

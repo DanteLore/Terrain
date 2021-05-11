@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
   m_Name: SavanaTreeSettings
   m_EditorClassIdentifier: 
-  placementThreshold: 0.05
+  placementThreshold: 0.1
   noiseScale: 5
   noiseAmplitude: 0.1
   trees:

@@ -59,9 +59,9 @@ public class TreeGenerator : ChunkDecorator
             GameObject tree = Instantiate(prefabs[rand.Next(prefabs.Count)]);
             tree.transform.SetParent(chunk.meshObject.transform);
 
-            tree.transform.position = pos + new Vector3(0f, -0.05f, 0f);
+            tree.transform.position = pos + new Vector3((float)rand.NextDouble() * gridStep - gridStep / 2, -0.05f, (float)rand.NextDouble() * gridStep - gridStep / 2);
             tree.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 1.25f, (float)rand.NextDouble());
-            tree.transform.eulerAngles = new Vector3(Mathf.Lerp(0f, 5f, (float)rand.NextDouble()), Mathf.Lerp(0f, 360f, (float)rand.NextDouble()), Mathf.Lerp(0f, 5f, (float)rand.NextDouble()));
+            tree.transform.eulerAngles = new Vector3((float)rand.NextDouble() * 5f, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * 5f);
 
             return tree;
         }

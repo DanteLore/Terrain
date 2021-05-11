@@ -19,7 +19,7 @@ MonoBehaviour:
     persistence: 0.4
     lacunarity: 2.6
     seed: 0
-    offset: {x: 35.6, y: -45.11}
+    offset: {x: 0, y: 0}
     normalizeMode: 1
   heightMultiplier: 50
   heightCurve:

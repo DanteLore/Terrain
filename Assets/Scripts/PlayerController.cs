@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         // Just in case we fall through the mesh
         if(transform.position.y < -10)
         {
-            transform.position = new Vector3(transform.position.x, 200f, transform.position.z);
+            transform.position = new Vector3(0, 200f, 0);
             Debug.Log("Turtles all the way down, man!");
         }
     }

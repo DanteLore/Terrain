@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b67223d0c956485ca0723ec42a7b59a, type: 3}
   m_Name: PineTreeSettings
   m_EditorClassIdentifier: 
-  placementThreshold: 0.15
+  placementThreshold: 0.4
   noiseScale: 30
-  noiseAmplitude: 0.2
+  noiseAmplitude: 0.01
   trees:
   - name: Pine Trees
     prefabs:
