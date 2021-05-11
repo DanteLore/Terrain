@@ -36,6 +36,6 @@ MonoBehaviour:
   maxHeight: 0.7
   lodIndex: 1
   maxClustersPerChunk: 20
-  minClusterRadius: 2
-  maxClusterRadius: 8
-  maxTiltAngle: 10
+  minClusterRadius: 4
+  maxClusterRadius: 12
+  maxTiltAngle: 6

@@ -21,8 +21,8 @@ MonoBehaviour:
   - {fileID: 5478357922584036129, guid: 459eb012755ba4b4c96077047bd2080b, type: 3}
   - {fileID: 1063956249699513646, guid: b1898ee58b3de46f5a8417d01fd52b88, type: 3}
   - {fileID: 2222732025794284486, guid: 98aad7498018247aca461da96d059986, type: 3}
-  minHeight: 0.1
-  maxHeight: 0.7
+  minHeight: 0.04
+  maxHeight: 0.4
   lodIndex: 1
   maxClustersPerChunk: 5
   minClusterRadius: 2

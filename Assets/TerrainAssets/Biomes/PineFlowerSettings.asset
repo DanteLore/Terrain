@@ -21,10 +21,10 @@ MonoBehaviour:
   - {fileID: 4959663674144016145, guid: 04990c5e1d3f3437ab3901640a40f272, type: 3}
   - {fileID: 2439665717050400358, guid: 80a875bf6f9a440f4a65176718012653, type: 3}
   - {fileID: 7363406183314373393, guid: 982d20e0bbc4c4671b7848c332f0282a, type: 3}
-  minHeight: 0.1
+  minHeight: 0.04
   maxHeight: 0.7
   lodIndex: 1
-  maxClustersPerChunk: 5
-  minClusterRadius: 2
-  maxClusterRadius: 8
+  maxClustersPerChunk: 10
+  minClusterRadius: 1
+  maxClusterRadius: 4
   maxTiltAngle: 10
