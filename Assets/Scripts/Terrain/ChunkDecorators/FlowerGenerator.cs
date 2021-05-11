@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FlowerGenerator : ChunkDecorator
 {
+    [Range(1, 16)]
+    public int gridStep = 2;
+
     private Dictionary<Vector2, List<GameObject>> flowers;
     private Dictionary<Vector2, List<FlowerCluster>> clusters;
 
@@ -69,9 +72,9 @@ public class FlowerGenerator : ChunkDecorator
 
         foreach(var cluster in clusters[chunk.coord])
         {
-            for(int y = cluster.minY; y < cluster.maxY; y += flowerSettings.gridStep)
+            for(int y = cluster.minY; y < cluster.maxY; y += gridStep)
             {
-                for(int x = cluster.minX; x < cluster.maxX; x += flowerSettings.gridStep)
+                for(int x = cluster.minX; x < cluster.maxX; x += gridStep)
                 {  
                     Vector2 pos = new Vector2(x, y);
                     float dist = (pos - cluster.position).sqrMagnitude;

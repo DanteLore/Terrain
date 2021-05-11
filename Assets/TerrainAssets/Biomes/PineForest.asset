@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeSettings: {fileID: 11400000, guid: c30f867bdc5774bd9a9bd9d96d634133, type: 2}
   flowerSettings: {fileID: 11400000, guid: 67822e57e27094bddbd3f03f4cf0d105, type: 2}
+  rockSettings: {fileID: 11400000, guid: 1e1e18f0646a7439fac0a3660bbee1e2, type: 2}

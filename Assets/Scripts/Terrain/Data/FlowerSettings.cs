@@ -6,9 +6,6 @@ using System;
 [CreateAssetMenu]
 public class FlowerSettings : ScriptableObject
 {
-    [Range(1, 16)]
-    public int gridStep = 2;
-
     [Range(0, 1)]
     public float placementThreshold = 0.2f;
 
