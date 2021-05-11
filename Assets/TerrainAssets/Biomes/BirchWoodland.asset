@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BirchWoodland
   m_EditorClassIdentifier: 
   treeSettings: {fileID: 11400000, guid: e85f5f1b4769d44249d8a0fbf7468850, type: 2}
+  flowerSettings: {fileID: 11400000, guid: 828ab857bb99949b3a3881cb859b0f0c, type: 2}

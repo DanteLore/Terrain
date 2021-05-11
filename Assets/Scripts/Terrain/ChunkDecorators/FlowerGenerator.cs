@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FlowerGenerator : ChunkDecorator
 {
-    public FlowerSettings flowerSettings;
-
     private Dictionary<Vector2, List<GameObject>> flowers;
     private Dictionary<Vector2, List<FlowerCluster>> clusters;
 
@@ -18,6 +16,9 @@ public class FlowerGenerator : ChunkDecorator
     public override void OnLodChange(TerrainChunk chunk, int lod)
     {
         base.OnLodChange(chunk, lod);
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
+
+        FlowerSettings flowerSettings = chunk.BlendedBiome(chunk.sampleCenter, rand).settings.flowerSettings;
 
         if(lod <= flowerSettings.lodIndex)
         {
@@ -27,9 +28,8 @@ public class FlowerGenerator : ChunkDecorator
             }
             else
             {
-                System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
-                GenerateClusterCenters(chunk, rand);
-                GenerateFlowers(chunk, rand);
+                GenerateClusterCenters(chunk, rand, flowerSettings);
+                GenerateFlowers(chunk, rand, flowerSettings);
             }
         }
         else if(flowers.ContainsKey(chunk.coord))
@@ -38,20 +38,23 @@ public class FlowerGenerator : ChunkDecorator
         }
     }
 
-    private void GenerateClusterCenters(TerrainChunk chunk, System.Random rand)
+    private void GenerateClusterCenters(TerrainChunk chunk, System.Random rand, FlowerSettings mainFlowerSettings)
     {
         if(!clusters.ContainsKey(chunk.coord))
         {
             List<FlowerCluster> chunkClusters = new List<FlowerCluster>();
-            for(int i = 0; i < rand.Next(flowerSettings.maxClustersPerChunk); i++)
+            for(int i = 0; i < rand.Next(mainFlowerSettings.maxClustersPerChunk); i++)
             {
-                float radius = flowerSettings.minClusterRadius + (float)rand.NextDouble() + (flowerSettings.maxClusterRadius - flowerSettings.minClusterRadius);
+                float radius = mainFlowerSettings.minClusterRadius + (float)rand.NextDouble() + (mainFlowerSettings.maxClusterRadius - mainFlowerSettings.minClusterRadius);
                 int r = Mathf.CeilToInt(radius);
                 int centerX = r + rand.Next(chunk.MapWidth - r * 2);
                 int centerY = r + rand.Next(chunk.MapHeight - r * 2);
+                Vector3 pos = chunk.MapToWorldPoint(centerX, centerY);
 
-                int index = rand.Next(flowerSettings.prefabs.Length);
-                GameObject prefab = flowerSettings.prefabs[index];
+                FlowerSettings localFlowerSettings = chunk.BlendedBiome(new Vector2(pos.x, pos.z), rand).settings.flowerSettings;
+                
+                int index = rand.Next(localFlowerSettings.prefabs.Length);
+                GameObject prefab = localFlowerSettings.prefabs[index];
 
                 chunkClusters.Add(new FlowerCluster(centerX, centerY, radius, prefab));
             }
@@ -60,7 +63,7 @@ public class FlowerGenerator : ChunkDecorator
         }
     }
 
-    private void GenerateFlowers(TerrainChunk chunk, System.Random rand)
+    private void GenerateFlowers(TerrainChunk chunk, System.Random rand, FlowerSettings flowerSettings)
     {
         flowers[chunk.coord] = new List<GameObject>();
 
@@ -79,7 +82,7 @@ public class FlowerGenerator : ChunkDecorator
 
                         if(prob <= flowerSettings.placementThreshold)
                         {
-                            var flower = PlaceFlower(chunk, x, y, cluster, rand);
+                            var flower = PlaceFlower(chunk, x, y, cluster, rand, flowerSettings);
                             if(flower != null)
                                 flowers[chunk.coord].Add(flower);
                         }
@@ -89,7 +92,7 @@ public class FlowerGenerator : ChunkDecorator
         }
     }
 
-    private GameObject PlaceFlower(TerrainChunk chunk, int x, int y, FlowerCluster cluster, System.Random rand)
+    private GameObject PlaceFlower(TerrainChunk chunk, int x, int y, FlowerCluster cluster, System.Random rand, FlowerSettings flowerSettings)
     {
         Vector3 pos = chunk.MapToWorldPoint(x, y);
 

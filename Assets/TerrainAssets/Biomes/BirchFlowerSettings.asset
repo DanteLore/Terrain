@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
+  m_Name: BirchFlowerSettings
+  m_EditorClassIdentifier: 
+  gridStep: 2
+  placementThreshold: 0.2
+  flowerScale: 1
+  prefabs:
+  - {fileID: 351489906714160645, guid: 5454fd482725c41b3a8a36d008320c4b, type: 3}
+  - {fileID: 5022838916530862108, guid: 74dc4072660144a658ee4fb313a42476, type: 3}
+  - {fileID: 5478357922584036129, guid: 459eb012755ba4b4c96077047bd2080b, type: 3}
+  - {fileID: 1063956249699513646, guid: b1898ee58b3de46f5a8417d01fd52b88, type: 3}
+  - {fileID: 2222732025794284486, guid: 98aad7498018247aca461da96d059986, type: 3}
+  minHeight: 0.1
+  maxHeight: 0.7
+  lodIndex: 1
+  maxClustersPerChunk: 5
+  minClusterRadius: 2
+  maxClusterRadius: 8
+  maxTiltAngle: 10

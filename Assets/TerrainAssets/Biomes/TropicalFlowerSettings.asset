@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
+  m_Name: TropicalFlowerSettings
+  m_EditorClassIdentifier: 
+  gridStep: 2
+  placementThreshold: 0.2
+  flowerScale: 1
+  prefabs:
+  - {fileID: 4245171077653090609, guid: 5496863fb6d6c4376883bee7f3065487, type: 3}
+  - {fileID: 4785979985816507135, guid: f12a2c574184a416b8fd26436ec39876, type: 3}
+  - {fileID: 441306467570139168, guid: b53fd1b09fbcf4d92ab14dc040141c75, type: 3}
+  - {fileID: 4082287325751369991, guid: c6bf4c7a2877c49bb9318099ff92a2f3, type: 3}
+  - {fileID: 8808988936389335348, guid: 4c7352d79f689437a884dd3f962004c6, type: 3}
+  - {fileID: 852206626462242008, guid: 6c4188df3f43842fca9bae71a4111d5a, type: 3}
+  - {fileID: 7624839240157146445, guid: f8ed2c8b25cd94946bba4d50d42a4265, type: 3}
+  - {fileID: 7363406183314373393, guid: 982d20e0bbc4c4671b7848c332f0282a, type: 3}
+  - {fileID: 4959663674144016145, guid: 04990c5e1d3f3437ab3901640a40f272, type: 3}
+  - {fileID: 351489906714160645, guid: 5454fd482725c41b3a8a36d008320c4b, type: 3}
+  - {fileID: 5022838916530862108, guid: 74dc4072660144a658ee4fb313a42476, type: 3}
+  - {fileID: 7874039247002596674, guid: cd86cdc1db4dd4477ba451ad19e1c449, type: 3}
+  - {fileID: 305047799051432987, guid: 3eff7e12177f54fd9aaec6148cf867f3, type: 3}
+  minHeight: 0.1
+  maxHeight: 0.7
+  lodIndex: 1
+  maxClustersPerChunk: 10
+  minClusterRadius: 2
+  maxClusterRadius: 8
+  maxTiltAngle: 10

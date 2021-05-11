@@ -13,17 +13,17 @@ public class FlowerSettings : ScriptableObject
     public float placementThreshold = 0.2f;
 
     [Range(0, 2)]
-    public float flowerScale = 0.75f;
+    public float flowerScale = 1.0f;
 
     public GameObject[] prefabs;
 
     [Range(0,1)]
-    public float minHeight;
+    public float minHeight = 0.1f;
 
     [Range(0,1)]
-    public float maxHeight;
+    public float maxHeight = 0.7f;
 
-    public int lodIndex = 0;
+    public int lodIndex = 1;
 
     public int maxClustersPerChunk = 5;
 

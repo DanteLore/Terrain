@@ -7,4 +7,6 @@ using System;
 public class BiomeSettings : ScriptableObject
 {
     public TreeSettings treeSettings;
+
+    public FlowerSettings flowerSettings;
 }

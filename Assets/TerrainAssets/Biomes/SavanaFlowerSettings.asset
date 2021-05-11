@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
+  m_Name: SavanaFlowerSettings
+  m_EditorClassIdentifier: 
+  gridStep: 2
+  placementThreshold: 0.2
+  flowerScale: 1
+  prefabs:
+  - {fileID: 8508364070854610180, guid: f9e803278ef4a40ad994fb78526c141b, type: 3}
+  - {fileID: 2703213574096852028, guid: 48097d608b3c244bb87a9a88f9d582e2, type: 3}
+  - {fileID: 7874039247002596674, guid: cd86cdc1db4dd4477ba451ad19e1c449, type: 3}
+  - {fileID: 8758322418840995042, guid: 1f424718f36c44cafb3a6a60ecc0b45e, type: 3}
+  - {fileID: 4583307484133104254, guid: 8a9a4a60f9d354b03b707f76f4731538, type: 3}
+  - {fileID: 8808988936389335348, guid: 4c7352d79f689437a884dd3f962004c6, type: 3}
+  - {fileID: 305047799051432987, guid: 3eff7e12177f54fd9aaec6148cf867f3, type: 3}
+  - {fileID: 4257350010018254479, guid: d9a6c55e1c68d4a8d8c4462711807b97, type: 3}
+  - {fileID: 7126070018801940058, guid: 7cdeda0d272c2492487f49b38776d009, type: 3}
+  - {fileID: 2063549213608677002, guid: 2a03a2969cb6d45a88d94b9d3212b0d3, type: 3}
+  - {fileID: 7568367141285745648, guid: bc125150ee41c477fa158050883f6928, type: 3}
+  - {fileID: 351489906714160645, guid: 5454fd482725c41b3a8a36d008320c4b, type: 3}
+  - {fileID: 5022838916530862108, guid: 74dc4072660144a658ee4fb313a42476, type: 3}
+  - {fileID: 5478357922584036129, guid: 459eb012755ba4b4c96077047bd2080b, type: 3}
+  - {fileID: 1063956249699513646, guid: b1898ee58b3de46f5a8417d01fd52b88, type: 3}
+  - {fileID: 2222732025794284486, guid: 98aad7498018247aca461da96d059986, type: 3}
+  minHeight: 0.1
+  maxHeight: 0.7
+  lodIndex: 1
+  maxClustersPerChunk: 20
+  minClusterRadius: 2
+  maxClusterRadius: 8
+  maxTiltAngle: 10

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
+  m_Name: PineFlowerSettings
+  m_EditorClassIdentifier: 
+  gridStep: 2
+  placementThreshold: 0.2
+  flowerScale: 1
+  prefabs:
+  - {fileID: 8071648096080859721, guid: fc522dfc6742342a3a1be3e5098ee032, type: 3}
+  - {fileID: 958139895829280945, guid: 63e00f90a6ee14e6ca294e3d1fbf08b6, type: 3}
+  - {fileID: 4959663674144016145, guid: 04990c5e1d3f3437ab3901640a40f272, type: 3}
+  - {fileID: 2439665717050400358, guid: 80a875bf6f9a440f4a65176718012653, type: 3}
+  - {fileID: 7363406183314373393, guid: 982d20e0bbc4c4671b7848c332f0282a, type: 3}
+  minHeight: 0.1
+  maxHeight: 0.7
+  lodIndex: 1
+  maxClustersPerChunk: 5
+  minClusterRadius: 2
+  maxClusterRadius: 8
+  maxTiltAngle: 10
