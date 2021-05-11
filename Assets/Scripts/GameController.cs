@@ -6,6 +6,7 @@ using System.Linq;
 public class GameController : MonoBehaviour
 {
     public Canvas mainMenuCanvas;
+    public Toggle fullScreenToggle;
     public Text worldPosText;
     public Text headingText;
     public TerrainGenerator terrainGenerator; 
@@ -33,7 +34,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        SetIsFullscreen(false);
         hudObject.SetActive(true);
         firstPersonController = player.GetComponent<RigidbodyFirstPersonController>();
         playerController = player.GetComponent<PlayerController>();
@@ -102,6 +102,11 @@ public class GameController : MonoBehaviour
         firstPersonController.enabled = !showMenu;
         menuObject.SetActive(showMenu);
         hudObject.SetActive(!showMenu);
+
+        if(showMenu)
+        {
+            fullScreenToggle.isOn = Screen.fullScreen;
+        }
     }
 
     private void UpdateHud()
@@ -115,13 +120,13 @@ public class GameController : MonoBehaviour
         compassText.transform.localRotation = Quaternion.Euler(0, 0, -heading);
     }
 
-    public void Quit()
+    public void QuitButtonClick()
     {
         Debug.Log("Bye bye!");
         Application.Quit();
     }
 
-    public void Resume()
+    public void ResumeButtonClick()
     {
         SetMenuVisible(false);
     }
