@@ -34,7 +34,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        hudObject.SetActive(true);
         firstPersonController = player.GetComponent<RigidbodyFirstPersonController>();
         playerController = player.GetComponent<PlayerController>();
         playerController.TargetChanged += OnPlayerTargetChanged;
@@ -48,6 +47,8 @@ public class GameController : MonoBehaviour
 
         if(messageText)
             messageText.text = "";
+
+        SetMenuVisible(false);
     }
 
     private void OnPlayerTargetChanged(PlayerController controller, Collider target)
@@ -81,8 +82,7 @@ public class GameController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            inMenu = !inMenu;
-            SetMenuVisible(inMenu);
+            SetMenuVisible(!inMenu);
         }
 
         // Emergency use only :)
