@@ -29,6 +29,7 @@ public class WaterDecorator : ChunkDecorator
         {
             var water = Instantiate(waterPrefab, Vector3.zero, Quaternion.identity);
             water.transform.parent = chunk.meshObject.transform;
+            water.layer = LayerMask.NameToLayer("Water");
 
             water.transform.position = chunk.meshObject.transform.position + new Vector3(0, waterLevel, 0);
             water.transform.localScale = new Vector3(chunk.TileSize / 10, 1, chunk.TileSize / 10); // divide by 10 because the prefab is 10x10 - hacky :(

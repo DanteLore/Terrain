@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
   m_Name: TropicalFlowerSettings
   m_EditorClassIdentifier: 
-  gridStep: 2
-  placementThreshold: 0.2
-  flowerScale: 1
+  placementThreshold: 0.3
+  flowerScale: 0.5
   prefabs:
   - {fileID: 4245171077653090609, guid: 5496863fb6d6c4376883bee7f3065487, type: 3}
   - {fileID: 4785979985816507135, guid: f12a2c574184a416b8fd26436ec39876, type: 3}

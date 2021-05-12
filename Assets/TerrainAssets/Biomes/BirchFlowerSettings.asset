@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
   m_Name: BirchFlowerSettings
   m_EditorClassIdentifier: 
-  gridStep: 2
-  placementThreshold: 0.2
-  flowerScale: 1
+  placementThreshold: 0.3
+  flowerScale: 0.5
   prefabs:
   - {fileID: 351489906714160645, guid: 5454fd482725c41b3a8a36d008320c4b, type: 3}
   - {fileID: 5022838916530862108, guid: 74dc4072660144a658ee4fb313a42476, type: 3}

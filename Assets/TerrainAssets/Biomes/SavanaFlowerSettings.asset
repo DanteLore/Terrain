@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
   m_Name: SavanaFlowerSettings
   m_EditorClassIdentifier: 
-  gridStep: 2
-  placementThreshold: 0.2
-  flowerScale: 1
+  placementThreshold: 0.3
+  flowerScale: 0.5
   prefabs:
   - {fileID: 8508364070854610180, guid: f9e803278ef4a40ad994fb78526c141b, type: 3}
   - {fileID: 2703213574096852028, guid: 48097d608b3c244bb87a9a88f9d582e2, type: 3}

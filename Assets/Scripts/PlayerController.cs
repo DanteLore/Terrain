@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public float maxTargetRange = 20f;
 
+    private int layerMask;
+
     private Collider _target;
     public Collider Target
     {
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(0, 200, 0);
+
+        layerMask = ~(LayerMask.GetMask("Terrain", "Water"));
     }
 
     void Update()
@@ -46,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
-        if(Physics.Raycast(ray, out hit, maxTargetRange) && hit.collider.gameObject.layer != LayerMask.NameToLayer("Terrain"))
+        if(Physics.Raycast(ray, out hit, maxTargetRange, layerMask))
         {
             if(hit.collider != Target)
             {

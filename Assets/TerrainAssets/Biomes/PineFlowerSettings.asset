@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60be70ccf32dd4b5485ff0392006099e, type: 3}
   m_Name: PineFlowerSettings
   m_EditorClassIdentifier: 
-  gridStep: 2
-  placementThreshold: 0.2
-  flowerScale: 1
+  placementThreshold: 0.3
+  flowerScale: 0.5
   prefabs:
   - {fileID: 8071648096080859721, guid: fc522dfc6742342a3a1be3e5098ee032, type: 3}
   - {fileID: 958139895829280945, guid: 63e00f90a6ee14e6ca294e3d1fbf08b6, type: 3}
