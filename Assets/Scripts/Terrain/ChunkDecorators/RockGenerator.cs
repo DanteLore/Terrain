@@ -73,7 +73,7 @@ public class RockGenerator : ChunkDecorator
                 var layFlat = Quaternion.FromToRotation(transform.up, normal);
                 rock.transform.rotation = layFlat * rock.transform.rotation * randomRotation;
 
-                rock.transform.position = pos + new Vector3(0f, -0.05f, 0f);
+                rock.transform.position = pos + new Vector3(0f, -0.1f, 0f);
                 rock.transform.localScale = Vector3.one * Mathf.Lerp(rockSettings.rockScale * 0.5f, rockSettings.rockScale * 1.5f, (float)rand.NextDouble());
 
                 return rock;

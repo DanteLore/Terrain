@@ -112,7 +112,7 @@ public class FlowerGenerator : ChunkDecorator
         var randomRotation = Quaternion.Euler((float)rand.NextDouble() * flowerSettings.maxTiltAngle, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * flowerSettings.maxTiltAngle);
         flower.transform.rotation = flower.transform.rotation * randomRotation;
 
-        flower.transform.position = pos + new Vector3(0f, -0.05f, 0f);
+        flower.transform.position = pos + new Vector3(1f - (float)rand.NextDouble() * 2f, -0.05f, 1f - (float)rand.NextDouble() * 2f);
         flower.transform.localScale = Vector3.one * Mathf.Lerp(flowerSettings.flowerScale * 0.5f, flowerSettings.flowerScale * 1.5f, (float)rand.NextDouble());
 
         return flower;
