@@ -29,7 +29,10 @@ public class TreeGenerator : ChunkDecorator
         {
             for(int x = 0; x <= chunk.MapWidth; x += gridStep)
             {  
-                Vector3 point = chunk.MapToWorldPoint(x, y);
+                int pX = Mathf.Clamp(x + rand.Next(gridStep) - gridStep / 2, 0, chunk.MapWidth); // Don't be so regular
+                int pY = Mathf.Clamp(y + rand.Next(gridStep) - gridStep / 2, 0, chunk.MapHeight);
+
+                Vector3 point = chunk.MapToWorldPoint(pX, pY); 
                 TreeSettings treeSettings = chunk.BlendedBiome(point, rand).settings.treeSettings;
                 float scale = 1.0f / treeSettings.noiseScale;
                 float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
@@ -37,7 +40,7 @@ public class TreeGenerator : ChunkDecorator
 
                 if(prob <= treeSettings.placementThreshold)
                 {
-                    var tree = PlaceTree(chunk, x, y, rand, treeSettings);
+                    var tree = PlaceTree(chunk, point, rand, treeSettings);
                     if(tree != null)
                         trees[chunk.coord].Add(tree);
                 }
@@ -45,9 +48,8 @@ public class TreeGenerator : ChunkDecorator
         }
     }
 
-    private GameObject PlaceTree(TerrainChunk chunk, int x, int y, System.Random rand, TreeSettings treeSettings)
+    private GameObject PlaceTree(TerrainChunk chunk, Vector3 pos, System.Random rand, TreeSettings treeSettings)
     {
-        Vector3 pos = chunk.MapToWorldPoint(x, y);
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         var possibleTrees = treeSettings.trees.Where(t => normHeight >= t.minHeight && normHeight <= t.maxHeight).ToList();
@@ -59,7 +61,7 @@ public class TreeGenerator : ChunkDecorator
             GameObject tree = Instantiate(prefabs[rand.Next(prefabs.Count)]);
             tree.transform.SetParent(chunk.meshObject.transform);
 
-            tree.transform.position = pos + new Vector3((float)rand.NextDouble() * gridStep - gridStep / 2, -0.05f, (float)rand.NextDouble() * gridStep - gridStep / 2);
+            tree.transform.position = pos + new Vector3(0, -0.05f, 0); // shift down into the ground a little
             tree.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 1.25f, (float)rand.NextDouble());
             tree.transform.eulerAngles = new Vector3((float)rand.NextDouble() * 5f, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * 5f);
 
