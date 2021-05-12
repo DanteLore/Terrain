@@ -11,4 +11,6 @@ public class BiomeSettings : ScriptableObject
     public FlowerSettings flowerSettings;
 
     public RockSettings rockSettings;
+
+    public PlantSettings plantSettings;
 }

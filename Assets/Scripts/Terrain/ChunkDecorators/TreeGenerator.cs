@@ -29,8 +29,8 @@ public class TreeGenerator : ChunkDecorator
         {
             for(int x = 0; x <= chunk.MapWidth; x += gridStep)
             {  
-                int pX = Mathf.Clamp(x + rand.Next(gridStep) - gridStep / 2, 0, chunk.MapWidth); // Don't be so regular
-                int pY = Mathf.Clamp(y + rand.Next(gridStep) - gridStep / 2, 0, chunk.MapHeight);
+                int pX = Mathf.Clamp(x + rand.Next(gridStep) - gridStep * 2, 0, chunk.MapWidth - 1); // Don't be so regular
+                int pY = Mathf.Clamp(y + rand.Next(gridStep) - gridStep * 2, 0, chunk.MapHeight - 1);
 
                 Vector3 point = chunk.MapToWorldPoint(pX, pY); 
                 TreeSettings treeSettings = chunk.BlendedBiome(point, rand).settings.treeSettings;
