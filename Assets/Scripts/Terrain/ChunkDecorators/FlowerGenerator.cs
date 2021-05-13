@@ -85,7 +85,10 @@ public class FlowerGenerator : ChunkDecorator
 
                         if(prob <= flowerSettings.placementThreshold)
                         {
-                            var flower = PlaceFlower(chunk, x, y, cluster, rand, flowerSettings);
+                            int pX = Mathf.Clamp(x + rand.Next(gridStep) - gridStep * 2, 0, chunk.MapWidth - 1); // Don't be so regular
+                            int pY = Mathf.Clamp(y + rand.Next(gridStep) - gridStep * 2, 0, chunk.MapHeight - 1);
+                            
+                            var flower = PlaceFlower(chunk, chunk.MapToWorldPoint(pX, pY), cluster, rand, flowerSettings);
                             if(flower != null)
                                 flowers[chunk.coord].Add(flower);
                         }
@@ -95,10 +98,8 @@ public class FlowerGenerator : ChunkDecorator
         }
     }
 
-    private GameObject PlaceFlower(TerrainChunk chunk, int x, int y, FlowerCluster cluster, System.Random rand, FlowerSettings flowerSettings)
+    private GameObject PlaceFlower(TerrainChunk chunk, Vector3 pos, FlowerCluster cluster, System.Random rand, FlowerSettings flowerSettings)
     {
-        Vector3 pos = chunk.MapToWorldPoint(x, y);
-
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         if(normHeight < flowerSettings.minHeight || normHeight > flowerSettings.maxHeight)
@@ -112,7 +113,7 @@ public class FlowerGenerator : ChunkDecorator
         var randomRotation = Quaternion.Euler((float)rand.NextDouble() * flowerSettings.maxTiltAngle, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * flowerSettings.maxTiltAngle);
         flower.transform.rotation = flower.transform.rotation * randomRotation;
 
-        flower.transform.position = pos + new Vector3(1f - (float)rand.NextDouble() * 2f, -0.05f, 1f - (float)rand.NextDouble() * 2f);
+        flower.transform.position = pos + Vector3.down * 0.05f;
         flower.transform.localScale = Vector3.one * Mathf.Lerp(flowerSettings.flowerScale * 0.5f, flowerSettings.flowerScale * 1.5f, (float)rand.NextDouble());
 
         return flower;

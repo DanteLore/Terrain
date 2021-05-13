@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public Toggle fullScreenToggle;
     public Text worldPosText;
     public Text headingText;
+    public Text fpsText;
     public TerrainGenerator terrainGenerator; 
 
     private RigidbodyFirstPersonController firstPersonController;
@@ -63,6 +64,7 @@ public class GameController : MonoBehaviour
             crosshairText.color = Color.red;
             crosshairText.text = activeCrosshairChar;
         }
+
         if(target != null)
         {
             messageText.text = target.name;
@@ -78,8 +80,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+    float deltaTime;
+    private void ShowFps()
+    {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        fpsText.text = Mathf.Ceil(fps).ToString ();
+    }
+
     void Update()
     {
+        ShowFps();
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             SetMenuVisible(!inMenu);
