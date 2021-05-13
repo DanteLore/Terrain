@@ -11,8 +11,9 @@ public class WaterDecorator : ChunkDecorator
     private Dictionary<Vector2, GameObject> waterGameObjects;
 
 
-    private void Start()
+    void Awake()
     {
+        priority = 9;
         waterGameObjects = new Dictionary<Vector2, GameObject>();
     }
 

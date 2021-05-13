@@ -19,15 +19,15 @@ public class TerrainChunk
     public Vector2 sampleCenter;
     public Bounds bounds;
 
-    MeshRenderer meshRenderer;
-    MeshFilter meshFilter;
-    MeshCollider meshCollider;
+    private MeshRenderer meshRenderer;
+    private MeshFilter meshFilter;
+    private MeshCollider meshCollider;
 
-    LODInfo[] detailLevels;
-    LODMesh[] lodMeshes;
+    private LODInfo[] detailLevels;
+    private LODMesh[] lodMeshes;
     int colliderLodIndex;
 
-    HeightMap heightMap;
+    public HeightMap heightMap;
     bool heightMapReceived;
     int previousLODIndex = -1;
     bool hasSetCollider;
@@ -38,7 +38,7 @@ public class TerrainChunk
     private MeshSettings meshSettings;
     private Transform viewer;
 
-    List<Biome> biomes;
+    private List<Biome> biomes;
 
     public int MapHeight
     {

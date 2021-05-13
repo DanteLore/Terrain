@@ -111,7 +111,7 @@ public class TerrainGenerator : MonoBehaviour
 
                         if(chunkDecorators != null)
                         {
-                            foreach(var decorator in chunkDecorators)
+                            foreach(var decorator in chunkDecorators.OrderBy(d => d.priority))
                             {
                                 decorator.HookEvents(newChunk);
                             }

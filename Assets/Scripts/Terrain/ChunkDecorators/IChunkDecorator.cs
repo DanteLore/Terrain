@@ -2,10 +2,14 @@ using UnityEngine;
 public interface IChunkDecorator
 {    
     void HookEvents(TerrainChunk chunk);
+
+    int priority { get; }
 }
 
 public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 {
+    public int priority { get; protected set; }
+
     public void HookEvents(TerrainChunk chunk)
     {
         chunk.HeightMapReady += OnHeightMapReady;
@@ -16,12 +20,14 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 
     public virtual void OnHeightMapReady(TerrainChunk chunk) 
     {
-
+        
     }
+
     public virtual void OnColliderSet(TerrainChunk chunk) 
     {
 
     }
+
     public virtual void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible) 
     {
 

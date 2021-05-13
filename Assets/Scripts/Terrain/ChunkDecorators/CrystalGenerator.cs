@@ -8,9 +8,9 @@ public class CrystalGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> crystals;
     private Dictionary<Vector2, List<CrystalCluster>> clusters;
-
-    void Start()
+    void Awake()
     {
+        priority = 10;
         crystals = new Dictionary<Vector2, List<GameObject>>();
         clusters = new Dictionary<Vector2, List<CrystalCluster>>();
     }

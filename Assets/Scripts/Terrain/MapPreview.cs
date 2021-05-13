@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class MapPreview : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap, Mesh, Falloff }
+    public enum DrawMode { NoiseMap, Mesh }
 
     public MeshSettings meshSettings;
     public HeightMapSettings heightMapSettings;
@@ -28,8 +28,6 @@ public class MapPreview : MonoBehaviour
             DrawTexture(TextureGenerator.TextureFromHeightMap(heightMap));
         else if(drawMode == DrawMode.Mesh)
             DrawMesh(MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLevelOfDetail));
-        else if(drawMode == DrawMode.Falloff)
-            DrawTexture(TextureGenerator.TextureFromHeightMap(new HeightMap(FalloffGenerator.GenerateFalloffMap(meshSettings.NumberOfVerticesPerLine), 0, 1)));
     }
 
     public void DrawTexture(Texture2D texture)

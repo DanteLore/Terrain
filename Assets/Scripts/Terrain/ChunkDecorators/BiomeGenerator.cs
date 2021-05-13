@@ -21,8 +21,9 @@ public class BiomeGenerator : ChunkDecorator
 
     private HashSet<Vector2> updatedChunks;
 
-    void Start()
+    void Awake()
     {
+        priority = 1;
         biomes = new List<Biome>();
         generatedCenters = new HashSet<Vector2>();
         updatedChunks = new HashSet<Vector2>();

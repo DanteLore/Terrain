@@ -27,7 +27,7 @@ public static class HeightMapGenerator
             }
         }
 
-        return new HeightMap(values, minValue, maxValue);
+        return new HeightMap(values, minValue, maxValue, width, height);
     }
 }
 
@@ -37,11 +37,15 @@ public struct HeightMap
     public readonly float[,] values;
     public readonly float minValue;
     public readonly float maxValue;
+    public readonly int width;
+    public readonly int height;
 
-    public HeightMap(float[,] heightMap, float minValue, float maxValue)
+    public HeightMap(float[,] heightMap, float minValue, float maxValue, int width, int height)
     {
         this.values = heightMap;
         this.minValue = minValue;
         this.maxValue = maxValue;
+        this.width = width;
+        this.height = height;
     }
 }

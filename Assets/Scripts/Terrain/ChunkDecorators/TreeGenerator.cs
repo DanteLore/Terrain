@@ -9,8 +9,9 @@ public class TreeGenerator : ChunkDecorator
     public int gridStep = 6;
     private Dictionary<Vector2, List<GameObject>> trees;
 
-    private void Start()
+    void Awake()
     {
+        priority = 10;
         trees = new Dictionary<Vector2, List<GameObject>>();
     }
 
@@ -21,7 +22,7 @@ public class TreeGenerator : ChunkDecorator
 
     private void GenerateTrees(TerrainChunk chunk)
     {
-        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000000 + chunk.coord.x));
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000000 + chunk.coord.x));
 
         trees[chunk.coord] = new List<GameObject>();
 

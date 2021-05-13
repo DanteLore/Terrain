@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4669ebfa3d894c56a28024076a7de94, type: 3}
+  m_Name: TropicalTempleSettings
+  m_EditorClassIdentifier: 
+  templeOnChunkProbability: 0.1
+  templeScale: 1
+  templePrefabs:
+  - {fileID: 1000014286614112, guid: c7e59f9921ac1164fad771e9267437f5, type: 3}
+  - {fileID: 1000013311032376, guid: ba861b6b4f5559f41a4f1188440fe846, type: 3}
+  - {fileID: 1000013576499054, guid: f63ae787fb2f9054d9fa3c0aaf2dee4d, type: 3}

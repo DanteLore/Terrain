@@ -10,8 +10,9 @@ public class FlowerGenerator : ChunkDecorator
     private Dictionary<Vector2, List<GameObject>> flowers;
     private Dictionary<Vector2, List<FlowerCluster>> clusters;
 
-    void Start()
+    void Awake()
     {
+        priority = 10;
         flowers = new Dictionary<Vector2, List<GameObject>>();
         clusters = new Dictionary<Vector2, List<FlowerCluster>>();
     }

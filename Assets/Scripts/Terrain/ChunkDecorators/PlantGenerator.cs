@@ -10,8 +10,9 @@ public class PlantGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> plants;
 
-    private void Start()
+    void Awake()
     {
+        priority = 10;
         plants = new Dictionary<Vector2, List<GameObject>>();
     }
     
