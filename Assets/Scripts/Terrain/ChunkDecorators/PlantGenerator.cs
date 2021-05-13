@@ -15,13 +15,28 @@ public class PlantGenerator : ChunkDecorator
         plants = new Dictionary<Vector2, List<GameObject>>();
     }
     
-    public override void OnHeightMapReady(TerrainChunk chunk)
+
+    public override void OnLodChange(TerrainChunk chunk, int lod)
     {
-        base.OnHeightMapReady(chunk);
-        
-        if(!plants.ContainsKey(chunk.coord))
+        base.OnLodChange(chunk, lod);
+        System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
+
+        PlantSettings plantSettings = chunk.BlendedBiome(chunk.sampleCenter, rand).settings.plantSettings;
+
+        if(lod <= plantSettings.lodIndex)
         {
+            if(plants.ContainsKey(chunk.coord))
+            {
+                plants[chunk.coord].ForEach(f => f.SetActive(true));
+            }
+            else
+            {
             GeneratePlants(chunk);
+            }
+        }
+        else if(plants.ContainsKey(chunk.coord))
+        {
+            plants[chunk.coord].ForEach(f => f.SetActive(false));
         }
     }
 

@@ -6,6 +6,8 @@ using System;
 [CreateAssetMenu]
 public class PlantSettings : ScriptableObject
 {
+    public int lodIndex = 1;
+
     [Range(1, 16)]
     public int gridStep = 2;
 
