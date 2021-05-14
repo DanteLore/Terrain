@@ -69,7 +69,8 @@ public class PlantGenerator : ChunkDecorator
         float placementProbability = (float)rand.NextDouble();
 
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
-        if(placementProbability <= plantSettings.placementThreshold && normHeight >= plantSettings.minHeight && normHeight <= plantSettings.maxHeight)
+
+        if(placementProbability <= plantSettings.placementThreshold && normHeight >= plantSettings.minHeight && normHeight <= plantSettings.maxHeight && !chunk.IsInExclusionZone(pos))
         {
             GameObject plant = Instantiate(plantSettings.prefabs[rand.Next(plantSettings.prefabs.Length)]);
             plant.transform.SetParent(chunk.meshObject.transform);

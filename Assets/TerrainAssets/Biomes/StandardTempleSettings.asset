@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4669ebfa3d894c56a28024076a7de94, type: 3}
   m_Name: StandardTempleSettings
   m_EditorClassIdentifier: 
-  templeOnChunkProbability: 0
+  templeOnChunkProbability: 1
   templeScale: 1
   falloffNoiseFrequency: 10
   falloffNoiseAmplitude: 0.568

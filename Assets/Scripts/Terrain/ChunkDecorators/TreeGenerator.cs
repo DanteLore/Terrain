@@ -34,16 +34,20 @@ public class TreeGenerator : ChunkDecorator
                 int pY = Mathf.Clamp(y + rand.Next(gridStep) - gridStep * 2, 0, chunk.MapHeight - 1);
 
                 Vector3 point = chunk.MapToWorldPoint(pX, pY); 
-                TreeSettings treeSettings = chunk.BlendedBiome(point, rand).settings.treeSettings;
-                float scale = 1.0f / treeSettings.noiseScale;
-                float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
-                prob +=  Mathf.Lerp(-treeSettings.noiseAmplitude, treeSettings.noiseAmplitude, (float)rand.NextDouble());
 
-                if(prob <= treeSettings.placementThreshold)
+                if(!chunk.IsInExclusionZone(point))
                 {
-                    var tree = PlaceTree(chunk, point, rand, treeSettings);
-                    if(tree != null)
-                        trees[chunk.coord].Add(tree);
+                    TreeSettings treeSettings = chunk.BlendedBiome(point, rand).settings.treeSettings;
+                    float scale = 1.0f / treeSettings.noiseScale;
+                    float prob = Mathf.PerlinNoise(point.x * scale, point.z * scale);
+                    prob +=  Mathf.Lerp(-treeSettings.noiseAmplitude, treeSettings.noiseAmplitude, (float)rand.NextDouble());
+
+                    if(prob <= treeSettings.placementThreshold)
+                    {
+                        var tree = PlaceTree(chunk, point, rand, treeSettings);
+                        if(tree != null)
+                            trees[chunk.coord].Add(tree);
+                    }
                 }
             }
         }

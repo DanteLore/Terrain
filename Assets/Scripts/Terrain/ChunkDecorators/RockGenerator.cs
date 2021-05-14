@@ -54,7 +54,7 @@ public class RockGenerator : ChunkDecorator
         RockSettings rockSettings = biome.settings.rockSettings;
         float placementProbability = (float)rand.NextDouble();
 
-        if(placementProbability <= rockSettings.placementThreshold)
+        if(placementProbability <= rockSettings.placementThreshold && !chunk.IsInExclusionZone(pos))
         {
             float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 

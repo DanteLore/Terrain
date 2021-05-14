@@ -40,6 +40,8 @@ public class TerrainChunk
 
     private List<Biome> biomes;
 
+    private List<Bounds> exclusionZones;
+
     public int MapHeight
     {
         get { return heightMap.values.GetLength(1); }
@@ -94,6 +96,7 @@ public class TerrainChunk
         this.viewer = viewer;
 
         this.biomes = new List<Biome>();
+        this.exclusionZones = new List<Bounds>();
 
         sampleCenter = coord * meshSettings.MeshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.MeshWorldSize;
@@ -187,6 +190,26 @@ public class TerrainChunk
         Vector2 vertexPosition2D = topLeft + sampleCenter + new Vector2(percent.x, -percent.y) * meshSettings.MeshWorldSize;
 
         return new Vector3(vertexPosition2D.x, height, vertexPosition2D.y);
+    }
+
+    public void AddExclusionZone(Vector3 center, float radius)
+    {
+        exclusionZones.Add(new Bounds(center, new Vector3(radius, radius, radius) * 2f));
+    }
+
+    public void AddExclusionZone(Vector3 center, Vector3 size)
+    {
+        exclusionZones.Add(new Bounds(center, size));
+    }
+
+    public void AddExclusionZone(Bounds bounds)
+    {
+        exclusionZones.Add(bounds);
+    }
+
+    public bool IsInExclusionZone(Vector3 point)
+    {
+        return exclusionZones.Any(z => z.Contains(point));
     }
 
     private void OnHeightMapReceived(object data)

@@ -28,10 +28,21 @@ public class TempleGenerator : ChunkDecorator
             // Flatten the land
             FlattenTheLand(chunk, templeSettings);
 
-            // Reserve the space
-
             // Place the prefab(s)
-            PlaceTemple(chunk, chunk.heightMap.width / 2, chunk.heightMap.height / 2, rand, templeSettings);
+            GameObject obj = PlaceTemple(chunk, chunk.heightMap.width / 2, chunk.heightMap.height / 2, rand, templeSettings);
+
+            // Reserve the space
+            if(obj != null)
+            {
+                Bounds b = new Bounds(obj.transform.position, Vector3.zero);
+
+                 foreach(var renderer in obj.GetComponentsInChildren<Renderer>())
+                 {
+                    b.Encapsulate(renderer.bounds);
+                 }
+
+                chunk.AddExclusionZone(b.center, b.size * 1.2f);
+            }
         }
     }
 
