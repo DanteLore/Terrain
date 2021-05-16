@@ -32,7 +32,7 @@ public class PlantGenerator : ChunkDecorator
             }
             else
             {
-            GeneratePlants(chunk);
+                GeneratePlants(chunk);
             }
         }
         else if(plants.ContainsKey(chunk.coord))

@@ -15,9 +15,25 @@ public class TreeGenerator : ChunkDecorator
         trees = new Dictionary<Vector2, List<GameObject>>();
     }
 
+    public override void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
+    {
+        base.OnChunkVisibilityChanged(chunk, visible);
+
+        if(visible)
+        {
+            GenerateTrees(chunk);
+        }
+        else
+        {
+            foreach(var tree in trees[chunk.coord])
+            {
+                ReleaseToPool(tree);
+            }
+        }
+    }
+
     public override void OnHeightMapReady(TerrainChunk chunk)
     {
-        GenerateTrees(chunk);
     }
 
     private void GenerateTrees(TerrainChunk chunk)
@@ -63,7 +79,7 @@ public class TreeGenerator : ChunkDecorator
         {
             var prefabs = possibleTrees.SelectMany(t => t.prefabs).ToList();
 
-            GameObject tree = Instantiate(prefabs[rand.Next(prefabs.Count)]);
+            GameObject tree = InstantiateFromPool(prefabs[rand.Next(prefabs.Count)]);
             tree.transform.SetParent(chunk.meshObject.transform);
 
             tree.transform.position = pos + new Vector3(0, -0.05f, 0); // shift down into the ground a little
