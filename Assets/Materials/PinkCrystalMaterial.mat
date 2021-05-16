@@ -10,7 +10,7 @@ Material:
   m_Name: PinkCrystalMaterial
   m_Shader: {fileID: -6465566751694194690, guid: fc6b0bb1f1aad4e0b8b6d6247cfcdbc8, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -32,8 +32,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_9cae0bcf043d4bf7a287eb37b727f5e1: 0.9
+    - Vector1_9cae0bcf043d4bf7a287eb37b727f5e1: 0.76
     - Vector1_9e46c15af7594d6c81cdc3587d23c77d: 0.5
     m_Colors:
+    - Color_3b0e68795dd14d2aa0ca5a6603a35206: {r: 0, g: 0.01568628, b: 1, a: 0}
     - Color_566b234b530b428ab3c7c0ce533b08f2: {r: 1, g: 0, b: 0.65129375, a: 0}
   m_BuildTextureStacks: []

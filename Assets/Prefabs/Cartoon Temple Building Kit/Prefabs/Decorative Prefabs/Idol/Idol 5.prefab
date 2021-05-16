@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4000013696795442}
   - component: {fileID: 33000010396214378}
   - component: {fileID: 23000011785460764}
+  - component: {fileID: 4152523879051632523}
+  - component: {fileID: 6947498563699015614}
+  - component: {fileID: 175971757841447122}
   m_Layer: 0
   m_Name: Idol 5
   m_TagString: Untagged
@@ -81,3 +84,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4152523879051632523
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012046017158}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.481325, y: 1.999176, z: 8.4813595}
+  m_Center: {x: -0.00000047683716, y: 0.99959946, z: -0.000002861023}
+--- !u!65 &6947498563699015614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012046017158}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.1880713, y: 4.074396, z: 7.0377283}
+  m_Center: {x: 0.01503706, y: 2.0372095, z: 0.030072808}
+--- !u!65 &175971757841447122
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012046017158}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.661717, y: 22.21002, z: 4.691826}
+  m_Center: {x: 0.04511285, y: 11.105021, z: -0.060153246}

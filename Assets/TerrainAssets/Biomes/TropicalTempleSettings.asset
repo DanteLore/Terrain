@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templeOnChunkProbability: 0.1
   templeScale: 1
+  falloffNoiseFrequency: 10
+  falloffNoiseAmplitude: 0.1
   templePrefabs:
   - {fileID: 1000014286614112, guid: c7e59f9921ac1164fad771e9267437f5, type: 3}
   - {fileID: 1000013311032376, guid: ba861b6b4f5559f41a4f1188440fe846, type: 3}
   - {fileID: 1000013576499054, guid: f63ae787fb2f9054d9fa3c0aaf2dee4d, type: 3}
+  - {fileID: 1000013598317750, guid: 605c5179c270f51458f90168a90b72a3, type: 3}
+  - {fileID: 1000012046017158, guid: 400b69d98dbfa264b8e9e55a42fea938, type: 3}
+  - {fileID: 1000013612302226, guid: 29724fdeb982b0144bf9db1cc6d22464, type: 3}
+  - {fileID: 1000010774182382, guid: 422535b6a130b0743bc1ca47febfd435, type: 3}
+  minHeight: 0.1
+  maxHeight: 0.6
