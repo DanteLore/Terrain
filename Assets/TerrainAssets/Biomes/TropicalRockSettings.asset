@@ -57,3 +57,11 @@ MonoBehaviour:
     - {fileID: 139742, guid: e9cb95ee3e55d914bbd4e5eb2d0a510c, type: 3}
     minHeight: 0.231
     maxHeight: 0.735
+  - name: Cactii
+    prefabs:
+    - {fileID: 1922896480124904, guid: 0f59c6f63553c7744ac3d7f67c8f0821, type: 3}
+    - {fileID: 1011851064195202, guid: 33889ea1ee6e4fe4b922d09e7cee3b35, type: 3}
+    - {fileID: 1881633241144324, guid: a18d360064d101f4c93889e7933c719c, type: 3}
+    - {fileID: 1593024057321466, guid: 7d7017793b4bf6e4a8d3fb9dd5516951, type: 3}
+    minHeight: 0.231
+    maxHeight: 0.735

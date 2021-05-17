@@ -38,3 +38,10 @@ MonoBehaviour:
     - {fileID: 127550, guid: 87a6cef862ce2cb4a88c5ca5d5af5d2b, type: 3}
     minHeight: 0.3
     maxHeight: 0.7
+  - name: dead Ones
+    prefabs:
+    - {fileID: 1401775310263374, guid: a51cbbedadaf47d479bc6a1c47b46f5b, type: 3}
+    - {fileID: 1949298340156750, guid: a4c074be12f86814ea9824e9966e45fb, type: 3}
+    - {fileID: 1447560660779542, guid: eee96d2b3af09c54aadeca6b884b8b14, type: 3}
+    minHeight: 0.1
+    maxHeight: 0.7

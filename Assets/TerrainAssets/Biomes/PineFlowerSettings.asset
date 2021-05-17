@@ -15,11 +15,13 @@ MonoBehaviour:
   placementThreshold: 0.3
   flowerScale: 0.5
   prefabs:
-  - {fileID: 8071648096080859721, guid: fc522dfc6742342a3a1be3e5098ee032, type: 3}
-  - {fileID: 958139895829280945, guid: 63e00f90a6ee14e6ca294e3d1fbf08b6, type: 3}
-  - {fileID: 4959663674144016145, guid: 04990c5e1d3f3437ab3901640a40f272, type: 3}
-  - {fileID: 2439665717050400358, guid: 80a875bf6f9a440f4a65176718012653, type: 3}
-  - {fileID: 7363406183314373393, guid: 982d20e0bbc4c4671b7848c332f0282a, type: 3}
+  - {fileID: 1998162821607582, guid: 5ddf778edb25e104c9b02819ac2335af, type: 3}
+  - {fileID: 1257957413574388, guid: 495bd8bc2a3e4b6479e5259148ca640f, type: 3}
+  - {fileID: 1703569947292720, guid: 42d1aa1e935099b44bbee795578466c2, type: 3}
+  - {fileID: 1877876609639262, guid: 7b08fe66855e56c4991a3055447b7355, type: 3}
+  - {fileID: 1308969254371838, guid: 9e8c3a7e58b8d4642bbf2694bf3a1c0a, type: 3}
+  - {fileID: 1629563166902632, guid: c49d07c7413b27948a36f11cb560c9fa, type: 3}
+  - {fileID: 1896528449128252, guid: 5c474a6ba92e1694c88c1b7a86df7682, type: 3}
   minHeight: 0.04
   maxHeight: 0.7
   lodIndex: 1
