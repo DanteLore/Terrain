@@ -7,6 +7,8 @@ public class FlowerGenerator : ChunkDecorator
     [Range(1, 16)]
     public int gridStep = 2;
 
+    public bool flowersEnabled = true;
+
     private Dictionary<Vector2, List<GameObject>> flowers;
     private Dictionary<Vector2, List<FlowerCluster>> clusters;
 
@@ -20,6 +22,10 @@ public class FlowerGenerator : ChunkDecorator
     public override void OnLodChange(TerrainChunk chunk, int lod)
     {
         base.OnLodChange(chunk, lod);
+
+        if(!flowersEnabled)
+            return;
+
         System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
 
         FlowerSettings flowerSettings = chunk.BlendedBiome(chunk.sampleCenter, rand).settings.flowerSettings;
