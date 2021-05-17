@@ -192,19 +192,11 @@ public class TerrainChunk
         return new Vector3(vertexPosition2D.x, height, vertexPosition2D.y);
     }
 
-    public void AddExclusionZone(Vector3 center, float radius)
-    {
-        exclusionZones.Add(new Bounds(center, new Vector3(radius, radius, radius) * 2f));
-    }
-
     public void AddExclusionZone(Vector3 center, Vector3 size)
     {
-        exclusionZones.Add(new Bounds(center, size));
-    }
-
-    public void AddExclusionZone(Bounds bounds)
-    {
-        exclusionZones.Add(bounds);
+        Bounds b = new Bounds(center, size);
+        if(!exclusionZones.Contains(b))
+            exclusionZones.Add(b);
     }
 
     public bool IsInExclusionZone(Vector3 point)

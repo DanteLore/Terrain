@@ -53,7 +53,7 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 
     protected GameObject InstantiateFromPool(GameObject prefab)
     {
-        string key = prefab.name + "(Clone)";
+        string key = prefab.name;
 
         if(!objectPool.ContainsKey(key))
         {
@@ -69,19 +69,5 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
     protected void ReleaseToPool(GameObject obj)
     {
         objectPool[obj.name].Enqueue(obj);
-    }
-
-    int i = 1;
-    void Update()
-    {
-        if(--i <= 0)
-        {
-            foreach(var key in objectPool.Keys)
-            {
-                Debug.Log(key + " => " + objectPool[key].Count);
-            }
-
-            i = 1000;
-        }
     }
 }

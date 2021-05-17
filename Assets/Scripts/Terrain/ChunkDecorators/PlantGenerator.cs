@@ -26,18 +26,12 @@ public class PlantGenerator : ChunkDecorator
 
         if(lod <= plantSettings.lodIndex)
         {
-            if(plants.ContainsKey(chunk.coord))
-            {
-                plants[chunk.coord].ForEach(f => f.SetActive(true));
-            }
-            else
-            {
-                GeneratePlants(chunk);
-            }
+            GeneratePlants(chunk);
         }
         else if(plants.ContainsKey(chunk.coord))
         {
-            plants[chunk.coord].ForEach(f => f.SetActive(false));
+            plants[chunk.coord].ForEach(ReleaseToPool);
+            plants.Remove(chunk.coord);
         }
     }
 
@@ -72,11 +66,12 @@ public class PlantGenerator : ChunkDecorator
 
         if(placementProbability <= plantSettings.placementThreshold && normHeight >= plantSettings.minHeight && normHeight <= plantSettings.maxHeight && !chunk.IsInExclusionZone(pos))
         {
-            GameObject plant = Instantiate(plantSettings.prefabs[rand.Next(plantSettings.prefabs.Length)]);
+            GameObject prefab = plantSettings.prefabs[rand.Next(plantSettings.prefabs.Length)];
+            GameObject plant = InstantiateFromPool(prefab);
             plant.transform.SetParent(chunk.meshObject.transform);
             plant.layer = LayerMask.NameToLayer("Plants");
-            plant.name = "Plant on chunk " + chunk.coord + " at: " + pos;
-
+            plant.name = prefab.name;
+            
             var randomRotation = Quaternion.Euler(5f, (float)rand.NextDouble() * 360, 5f);
             plant.transform.rotation = plant.transform.rotation * randomRotation;
 

@@ -26,19 +26,13 @@ public class FlowerGenerator : ChunkDecorator
 
         if(lod <= flowerSettings.lodIndex)
         {
-            if(flowers.ContainsKey(chunk.coord))
-            {
-                flowers[chunk.coord].ForEach(f => f.SetActive(true));
-            }
-            else
-            {
-                GenerateClusterCenters(chunk, rand, flowerSettings);
-                GenerateFlowers(chunk, rand, flowerSettings);
-            }
+            GenerateClusterCenters(chunk, rand, flowerSettings);
+            GenerateFlowers(chunk, rand, flowerSettings);
         }
         else if(flowers.ContainsKey(chunk.coord))
         {
-            flowers[chunk.coord].ForEach(f => f.SetActive(false));
+            flowers[chunk.coord].ForEach(ReleaseToPool);
+            flowers.Remove(chunk.coord);
         }
     }
 
@@ -106,10 +100,10 @@ public class FlowerGenerator : ChunkDecorator
         if(normHeight < flowerSettings.minHeight || normHeight > flowerSettings.maxHeight)
             return null;
 
-        GameObject flower = Instantiate(cluster.prefab);
+        GameObject flower = InstantiateFromPool(cluster.prefab);
         flower.transform.SetParent(chunk.meshObject.transform);
         flower.layer = LayerMask.NameToLayer("Flowers");
-        flower.name = "Flower on chunk " + chunk.coord + " at: " + pos;
+        flower.name = cluster.prefab.name;
 
         var randomRotation = Quaternion.Euler((float)rand.NextDouble() * flowerSettings.maxTiltAngle, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * flowerSettings.maxTiltAngle);
         flower.transform.rotation = flower.transform.rotation * randomRotation;

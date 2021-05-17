@@ -14,7 +14,6 @@ public class CrystalGenerator : ChunkDecorator
         crystals = new Dictionary<Vector2, List<GameObject>>();
         clusters = new Dictionary<Vector2, List<CrystalCluster>>();
     }
-
     public override void OnLodChange(TerrainChunk chunk, int lod)
     {
         base.OnLodChange(chunk, lod);
@@ -34,7 +33,8 @@ public class CrystalGenerator : ChunkDecorator
         }
         else if(crystals.ContainsKey(chunk.coord))
         {
-            crystals[chunk.coord].ForEach(f => f.SetActive(false));
+            crystals[chunk.coord].ForEach(ReleaseToPool);
+            crystals.Remove(chunk.coord);
         }
     }
 
@@ -102,10 +102,10 @@ public class CrystalGenerator : ChunkDecorator
 
         int index = rand.Next(crystalSettings.prefabs.Length);
         GameObject prefab = crystalSettings.prefabs[index];
-        GameObject crystal = Instantiate(prefab);
+        GameObject crystal = InstantiateFromPool(prefab);
+        crystal.name = prefab.name;
         crystal.transform.SetParent(chunk.meshObject.transform);
         crystal.layer = LayerMask.NameToLayer("Crystals");
-        crystal.name = "Crystal on chunk " + chunk.coord + " at: " + pos;
 
         var randomRotation = Quaternion.Euler((float)rand.NextDouble() * crystalSettings.maxTiltAngle, (float)rand.NextDouble() * 360f, (float)rand.NextDouble() * crystalSettings.maxTiltAngle);
         var layFlat = Quaternion.FromToRotation(transform.up, normal);

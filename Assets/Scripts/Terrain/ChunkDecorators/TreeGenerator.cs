@@ -79,8 +79,10 @@ public class TreeGenerator : ChunkDecorator
         {
             var prefabs = possibleTrees.SelectMany(t => t.prefabs).ToList();
 
-            GameObject tree = InstantiateFromPool(prefabs[rand.Next(prefabs.Count)]);
+            GameObject prefab = prefabs[rand.Next(prefabs.Count)];
+            GameObject tree = InstantiateFromPool(prefab);
             tree.transform.SetParent(chunk.meshObject.transform);
+            tree.name = prefab.name;
 
             tree.transform.position = pos + new Vector3(0, -0.05f, 0); // shift down into the ground a little
             tree.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 1.25f, (float)rand.NextDouble());

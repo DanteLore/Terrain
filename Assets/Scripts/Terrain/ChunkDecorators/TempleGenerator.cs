@@ -9,41 +9,63 @@ public class TempleGenerator : ChunkDecorator
     [Range(1, 16)]
     public int gridStep = 6;
 
+    private Dictionary<Vector2, List<GameObject>> temples;
+
     void Awake()
     {
         priority = 5;
+        temples = new Dictionary<Vector2, List<GameObject>>();
     }
 
-    public override void OnHeightMapReady(TerrainChunk chunk)
+    public override void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
+    {
+        base.OnChunkVisibilityChanged(chunk, visible);
+
+        if(visible)
+        {
+            CreateTemples(chunk);
+        }
+        else
+        {
+            temples[chunk.coord].ForEach(ReleaseToPool);
+            temples.Remove(chunk.coord);
+        }
+    }
+
+    private void CreateTemples(TerrainChunk chunk)
     {
         System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y * 10000 + chunk.coord.x));
         Biome biome = chunk.NearestBiome(chunk.sampleCenter);
         TempleSettings templeSettings = biome.settings.templeSettings;
+        temples.Add(chunk.coord, new List<GameObject>());
 
         float prob = (float)rand.NextDouble();
         float min = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, chunk.heightMap.minValue);
         float max = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, chunk.heightMap.maxValue);
         if(prob <= templeSettings.templeOnChunkProbability && min >= templeSettings.minHeight && max <= templeSettings.maxHeight)
         {
-            // Flatten the land
             FlattenTheLand(chunk, templeSettings);
 
-            // Place the prefab(s)
             GameObject obj = PlaceTemple(chunk, chunk.heightMap.width / 2, chunk.heightMap.height / 2, rand, templeSettings);
 
-            // Reserve the space
             if(obj != null)
             {
-                Bounds b = new Bounds(obj.transform.position, Vector3.zero);
-
-                 foreach(var renderer in obj.GetComponentsInChildren<Renderer>())
-                 {
-                    b.Encapsulate(renderer.bounds);
-                 }
-
-                chunk.AddExclusionZone(b.center, b.size * 1.2f);
+                temples[chunk.coord].Add(obj);
+                ReserveSpace(chunk, obj);
             }
         }
+    }
+
+    private void ReserveSpace(TerrainChunk chunk, GameObject obj)
+    {
+        Bounds b = new Bounds(obj.transform.position, Vector3.zero);
+
+        foreach(var renderer in obj.GetComponentsInChildren<Renderer>())
+        {
+            b.Encapsulate(renderer.bounds);
+        }
+
+        chunk.AddExclusionZone(b.center, b.size * 1.2f);
     }
 
     private void FlattenTheLand(TerrainChunk chunk, TempleSettings templeSettings)
@@ -78,10 +100,10 @@ public class TempleGenerator : ChunkDecorator
         float normHeight = Mathf.InverseLerp(chunk.MinPossibleHeight, chunk.MaxPossibleHeight, pos.y);
 
         GameObject prefab = templeSettings.templePrefabs[rand.Next(templeSettings.templePrefabs.Length)];
-        GameObject temple = Instantiate(prefab);
+        GameObject temple = InstantiateFromPool(prefab);
         temple.transform.SetParent(chunk.meshObject.transform);
         temple.layer = LayerMask.NameToLayer("Rocks");
-        temple.name = "Temple on chunk " + chunk.coord + " at: " + pos;
+        temple.name = prefab.name;
 
         // Rotate so it's flat on the ground and randomly around the y axis
         var randomRotation = Quaternion.Euler((float)rand.NextDouble(), (float)rand.NextDouble() * 360, (float)rand.NextDouble());

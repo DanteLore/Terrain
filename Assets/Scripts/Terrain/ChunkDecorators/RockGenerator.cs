@@ -15,14 +15,19 @@ public class RockGenerator : ChunkDecorator
         priority = 10;
         rocks = new Dictionary<Vector2, List<GameObject>>();
     }
-    
-    public override void OnHeightMapReady(TerrainChunk chunk)
+
+    public override void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible)
     {
-        base.OnHeightMapReady(chunk);
+        base.OnChunkVisibilityChanged(chunk, visible);
         
-        if(!rocks.ContainsKey(chunk.coord))
+        if(visible)
         {
             GenerateRocks(chunk);
+        }
+        else
+        {
+            rocks[chunk.coord].ForEach(ReleaseToPool);
+            rocks.Remove(chunk.coord);
         }
     }
 
@@ -64,10 +69,11 @@ public class RockGenerator : ChunkDecorator
             {
                 var prefabs = possibleRocks.SelectMany(t => t.prefabs).ToList();
 
-                GameObject rock = Instantiate(prefabs[rand.Next(prefabs.Count)]);
+                GameObject prefab = prefabs[rand.Next(prefabs.Count)];
+                GameObject rock = InstantiateFromPool(prefab);
                 rock.transform.SetParent(chunk.meshObject.transform);
                 rock.layer = LayerMask.NameToLayer("Rocks");
-                rock.name = "Rock on chunk " + chunk.coord + " at: " + pos;
+                rock.name = prefab.name;
 
                 // Rotate so it's flat on the ground and randomly around the y axis
                 var randomRotation = Quaternion.Euler(0, (float)rand.NextDouble() * 360, 0);
