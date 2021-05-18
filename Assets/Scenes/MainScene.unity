@@ -428,8 +428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sun: {fileID: 277726764}
-  dayLengthSeconds: 600
-  currentTimeOfDay: 0.205
+  dayLengthSeconds: 1200
+  currentTimeOfDay: 0.32
   daytimeFogColor: {r: 0.41960785, g: 0.47843137, b: 0.627451, a: 0}
   nighttimeFogColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &232576867
