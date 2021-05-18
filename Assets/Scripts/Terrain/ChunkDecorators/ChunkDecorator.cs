@@ -68,6 +68,37 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 
     protected void ReleaseToPool(GameObject obj)
     {
+        obj.SetActive(false);
         objectPool[obj.name].Enqueue(obj);
+    }
+
+    protected GameObject CombineMeshesToParent(List<GameObject> items, GameObject grandparent)
+    {
+        if(items.Count == 0)
+            return null;
+
+        GameObject parent = new GameObject(this.GetType().Name + " Meshes");
+        parent.transform.parent = grandparent.transform;
+        parent.AddComponent<UnityEngine.MeshRenderer>();
+        parent.AddComponent<UnityEngine.MeshFilter>();
+        parent.GetComponent<Renderer>().material = items[0].GetComponent<Renderer>().material;
+        
+        CombineInstance[] combine = new CombineInstance[items.Count];
+
+        for(int i = 0; i < combine.Length; i++)
+        {
+            items[i].transform.parent = parent.transform;
+
+            combine[i].mesh = items[i].GetComponentInChildren<MeshFilter>().sharedMesh;
+            combine[i].transform = items[i].transform.localToWorldMatrix;
+            items[i].SetActive(false);
+        }
+
+        parent.transform.GetComponent<MeshFilter>().mesh = new Mesh();
+        parent.transform.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        parent.transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
+        parent.transform.gameObject.SetActive(true);
+
+        return parent;
     }
 }

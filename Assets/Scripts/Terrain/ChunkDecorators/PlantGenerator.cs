@@ -24,11 +24,11 @@ public class PlantGenerator : ChunkDecorator
 
         PlantSettings plantSettings = chunk.BlendedBiome(chunk.sampleCenter, rand).settings.plantSettings;
 
-        if(lod <= plantSettings.lodIndex)
+        if(lod <= plantSettings.lodIndex && !plants.ContainsKey(chunk.coord))
         {
             GeneratePlants(chunk);
         }
-        else if(plants.ContainsKey(chunk.coord))
+        else if(lod > plantSettings.lodIndex && plants.ContainsKey(chunk.coord))
         {
             plants[chunk.coord].ForEach(ReleaseToPool);
             plants.Remove(chunk.coord);

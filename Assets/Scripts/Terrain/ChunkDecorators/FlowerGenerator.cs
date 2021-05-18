@@ -11,6 +11,7 @@ public class FlowerGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> flowers;
     private Dictionary<Vector2, List<FlowerCluster>> clusters;
+    private Dictionary<Vector2, GameObject> meshParents;
 
     void Awake()
     {
@@ -30,12 +31,13 @@ public class FlowerGenerator : ChunkDecorator
 
         FlowerSettings flowerSettings = chunk.BlendedBiome(chunk.sampleCenter, rand).settings.flowerSettings;
 
-        if(lod <= flowerSettings.lodIndex)
+        if(lod <= flowerSettings.lodIndex && !flowers.ContainsKey(chunk.coord))
         {
             GenerateClusterCenters(chunk, rand, flowerSettings);
             GenerateFlowers(chunk, rand, flowerSettings);
+            CombineMeshesToParent(flowers[chunk.coord], chunk.meshObject);
         }
-        else if(flowers.ContainsKey(chunk.coord))
+        else if(lod > flowerSettings.lodIndex && flowers.ContainsKey(chunk.coord))
         {
             flowers[chunk.coord].ForEach(ReleaseToPool);
             flowers.Remove(chunk.coord);
