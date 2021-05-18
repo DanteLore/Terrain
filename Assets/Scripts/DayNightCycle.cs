@@ -27,8 +27,6 @@ public class DayNightCycle : MonoBehaviour
         if(currentTimeOfDay >= 1)
             currentTimeOfDay -= 1;
 
-        Debug.Log(currentTimeOfDay);
-
         sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * -360f) - 90f, 90f, 90f);
 
         if(currentTimeOfDay <= 0.2f)
