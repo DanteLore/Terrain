@@ -8,10 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TerrainMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 6a630e3b3947b44a39efd155247959bd, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 2e6a00a98a365458794750f3a72f684f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -19,12 +19,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_e1f90655bd60494fb3652604ba202f3b:
-        m_Texture: {fileID: 0}
+    - Texture2D_06adddbdeb46477aa87474ddd80ef519:
+        m_Texture: {fileID: 2800000, guid: 10579396bdc0a4577aa1cd6c3c3ec279, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Triplanar_b30e22fd4f6e463b95732b1849715624_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 625130d763c1f4ac0b63adf09f4060db, type: 3}
+    - Texture2D_2ea3873f068e49b0aead9b9aa4b78032:
+        m_Texture: {fileID: 2800000, guid: c055f812214204513b1e50af52417cf2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_463d9aa53460440980be48f5f643099a:
+        m_Texture: {fileID: 2800000, guid: 46e3664a3490949ccaafaab83661aca0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4c7a331ce7fa4a2eac33ec5633fc6dd4:
+        m_Texture: {fileID: 2800000, guid: e0c5288e98591411abf5133bd781cf31, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_64b38f0491d34e63a5bcbd7abc823c53:
+        m_Texture: {fileID: 2800000, guid: 1a972c2e9549946ce8074aed16e76dc3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -40,17 +52,28 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_0b4e2b6c2e57406cbc2442c0476d86b0: 0.05
-    - Vector1_2b131c8f411e4db88a0b46a5862f5eec: -0.178
-    - Vector1_2de13fad85d14cbd9c38f5796e50859d: 52
-    - Vector1_31d781842aee42c48a568980d2782fc5: 1
-    - Vector1_55a62df8a2c245018dfec8f51284b693: -0.112
-    - Vector1_9b661a7f8aa2419d9acfb8a011d9d3cc: 0
-    - Vector1_a6c17a46c6cc4c0aa53554b55154a48c: 0.403
-    - Vector1_c6ceb1ac0bca4393b10f4e2e9bab6880: 100
-    - Vector1_d0b1be8367d44abbbdd155eb81aa308e: -10
+    - Vector1_044f469968f74cb58c31eadb7fb5881b: 0.2
+    - Vector1_09f827d158ee4e6ab36a6e6f3ed855f0: 0.55
+    - Vector1_31ffdb12564847afb815d8c596971609: 0.4
+    - Vector1_342cef70d7864cb0ae76e58d16420172: 0.1
+    - Vector1_45c4757cdf3543368f822f3dc264c300: 0.1
+    - Vector1_4d18564455bb4e68ac929cd02f348aad: 0.527
+    - Vector1_5ee9530279824a5a84ba741d669d1969: 0.508
+    - Vector1_6b5f96c470b449619d84f6331ec03466: 0.7
+    - Vector1_6eb61888198f43e887966d74eb5cb265: 0.25
+    - Vector1_73fd92a81be249858ff3cdb4ae0f8094: 0.35
+    - Vector1_7f4ac128681b441eb1bb73eba86f164f: 0.6
+    - Vector1_8274355fb76d462eb56f95b94e0e8bf7: 52
+    - Vector1_960092eee6a24364bbd0b2b8f39c7793: 0.5
+    - Vector1_96f381008b084011954ff84c772d4567: 0.1
+    - Vector1_bebd3fe1e0774141bba33703396e96be: 0
+    - Vector1_d3f657339b67416caa33564eba627ffd: 0.02
+    - Vector1_d841a7b821a6416b9224411257b9a9a0: 0.7
+    - Vector1_e4954c3e9eae48e9879fcd1f720fc96e: 0.95
     m_Colors:
-    - Color_20082a35059e45cab41c08317b3492cc: {r: 0, g: 0.28511548, b: 1, a: 1}
-    - Color_70dcc8b79fc34a6899e20cd68ffb8e6b: {r: 1, g: 1, b: 1, a: 1}
-    - Color_f85e06d7052c4760823c80858b6f4034: {r: 0.21186365, g: 0.6509434, b: 0.21186365, a: 0}
+    - Color_09c9d5db512640849671c7fe0ea45efc: {r: 1, g: 1, b: 1, a: 0}
+    - Color_1670edb93c9b4ab2b334f2b8b4dbb768: {r: 0.06182, g: 0.34905657, b: 0.01152546, a: 0}
+    - Color_53c0f94b6d034df6bd03f2e3ded88ecc: {r: 0.26217487, g: 0.33962256, b: 0.26112485, a: 0}
+    - Color_8155fd2ca62c42578c94698631eb7355: {r: 0.46226418, g: 0.45844832, b: 0.44700074, a: 0}
+    - Color_fa9d89f5057a4fefa709c4b650e2eeea: {r: 0.6698113, g: 0.52492833, b: 0.09794406, a: 0}
   m_BuildTextureStacks: []
