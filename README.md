@@ -2,7 +2,7 @@
 
 This game was made following this tutorial: https://www.youtube.com/watch?v=WP-Bm65Q-1Y
 
-Since then I've added a load of procedurally generated assets like flowers, temples, rocks and trees; learned how to use Shader Graph; implemented object pooling and mesh combination to boost performance; added basic navigation and a HUD...  I wonder what I'll do next.
+Since then I've added a load of procedurally generated assets like flowers, temples, rocks and trees; learned how to use Shader Graph; implemented object pooling and mesh combination to boost performance; added basic navigation and a HUD; created four different biomes; added a day night cycle; learned a hell of a lot about lighting (though it still confuses me)...  I wonder what I'll do next.
 
 ![Screenshot1](Screenshots/screenshot10.png)
 
