@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4669ebfa3d894c56a28024076a7de94, type: 3}
   m_Name: PineTempleSettings
   m_EditorClassIdentifier: 
-  templeOnChunkProbability: 0.1
+  templeOnChunkProbability: 0.5
   templeScale: 1.5
   falloffNoiseFrequency: 10
   falloffNoiseAmplitude: 0.1
   templePrefabs:
   - {fileID: 3243848475852377509, guid: e0f858e7efa494a439ef6696abddd2dc, type: 3}
-  minHeight: 0.2
-  maxHeight: 0.5
+  minHeight: 0.4
+  maxHeight: 0.85
