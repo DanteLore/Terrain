@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
 
     public TerrainGenerator terrainGenerator;
 
+    public GameObject torch;
+
+    private bool torchIsOn = false;
+
     public float maxTargetRange = 20f;
 
     private int layerMask;
@@ -36,7 +40,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(0, 200, 0);
-
         layerMask = ~(LayerMask.GetMask("Terrain", "Water"));
     }
 
@@ -44,6 +47,12 @@ public class PlayerController : MonoBehaviour
     {
         EmergencyFallPrevention();
         ManageTarget();
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            torchIsOn = !torchIsOn;
+            torch.SetActive(torchIsOn);
+        }
     }
 
     private void ManageTarget()

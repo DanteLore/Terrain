@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
     {
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
-        fpsText.text = Mathf.Ceil(fps).ToString ();
+        fpsText.text = Mathf.Ceil(fps).ToString();
     }
 
     void Update()
@@ -126,8 +126,8 @@ public class GameController : MonoBehaviour
         Vector2 pos = terrainGenerator.GameToMapPos(player.transform.position);
         float heading =  player.transform.rotation.eulerAngles.y;
 
-        worldPosText.text = string.Format("X: {0:0} Z: {1:0}", pos.x, pos.y);
-        headingText.text = string.Format("{0:0}°", heading);
+        worldPosText.text = "X: " + Mathf.RoundToInt(pos.x) + " Z: " + Mathf.RoundToInt(pos.y);
+        headingText.text = Mathf.RoundToInt(heading).ToString();
         
         compassText.transform.localRotation = Quaternion.Euler(0, 0, -heading);
     }

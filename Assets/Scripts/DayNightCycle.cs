@@ -20,24 +20,40 @@ public class DayNightCycle : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentTimeOfDay += (Time.deltaTime / dayLengthSeconds);
-        if(currentTimeOfDay >= 1)
+        if (currentTimeOfDay >= 1)
             currentTimeOfDay -= 1;
 
         sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * -360f) - 90f, 90f, 90f);
 
-        if(currentTimeOfDay <= 0.2f)
+        if (currentTimeOfDay <= 0.2f)
+        {
+            sun.intensity = 0;
             RenderSettings.fogColor = nighttimeFogColor;
-        else if(currentTimeOfDay <= 0.3f)
-            RenderSettings.fogColor = Color.Lerp(nighttimeFogColor, daytimeFogColor, Mathf.InverseLerp(0.2f, 0.3f, currentTimeOfDay));
-        else if(currentTimeOfDay <= 0.7f)
+        }
+        else if (currentTimeOfDay <= 0.3f)
+        {
+            float t = Mathf.InverseLerp(0.2f, 0.3f, currentTimeOfDay);
+            sun.intensity = Mathf.Lerp(0, 1, t);
+            RenderSettings.fogColor = Color.Lerp(nighttimeFogColor, daytimeFogColor, t);
+        }
+        else if (currentTimeOfDay <= 0.7f)
+        {
+            sun.intensity = 1;
             RenderSettings.fogColor = daytimeFogColor;
-        else if(currentTimeOfDay <= 0.8f)
-            RenderSettings.fogColor = Color.Lerp(daytimeFogColor, nighttimeFogColor, Mathf.InverseLerp(0.7f, 0.8f, currentTimeOfDay));
+        }
+        else if (currentTimeOfDay <= 0.8f)
+        {
+            float t = Mathf.InverseLerp(0.7f, 0.8f, currentTimeOfDay);
+            sun.intensity = Mathf.Lerp(1, 0, t);
+            RenderSettings.fogColor = Color.Lerp(daytimeFogColor, nighttimeFogColor, t);
+        }
         else
+        {
+            sun.intensity = 0;
             RenderSettings.fogColor = nighttimeFogColor;
+        }
     }
 }
