@@ -103,8 +103,6 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
             meshParents.Add(chunk.coord, new List<GameObject>());
 
         GameObject parent = CreateParent(chunk);
-        parent.AddComponent<UnityEngine.MeshRenderer>();
-        parent.AddComponent<UnityEngine.MeshFilter>();
         parent.GetComponent<Renderer>().material = items[0].GetComponent<Renderer>().material;
         
         CombineInstance[] combine = new CombineInstance[items.Count];
@@ -130,11 +128,19 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
     {
         GameObject p;
         if(meshParents.ContainsKey(chunk.coord) && meshParents[chunk.coord].Any())
+        {
             p = meshParents[chunk.coord].First();
+        }
         else if(meshPool.Count > 0)
+        {
             p = meshPool.Dequeue();
+        }
         else
+        {
             p = new GameObject();
+            p.AddComponent<UnityEngine.MeshRenderer>();
+            p.AddComponent<UnityEngine.MeshFilter>();
+        }
         
         p.name = this.GetType().Name + " Meshes";
         meshParents[chunk.coord].Add(p);
