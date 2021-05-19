@@ -4,6 +4,10 @@ This game was made following this tutorial: https://www.youtube.com/watch?v=WP-B
 
 There's nothing special to see here - YET! :)
 
+![Screenshot1](Screenshots/screenshot10.png)
+
+![Screenshot1](Screenshots/screenshot11.png)
+
 ![Screenshot1](Screenshots/screenshot1.png)
 
 ![Screenshot2](Screenshots/screenshot2.png)
