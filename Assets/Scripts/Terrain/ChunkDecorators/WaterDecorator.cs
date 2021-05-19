@@ -10,8 +10,10 @@ public class WaterDecorator : ChunkDecorator
 
     private Dictionary<Vector2, GameObject> waterGameObjects;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         priority = 9;
         waterGameObjects = new Dictionary<Vector2, GameObject>();
     }

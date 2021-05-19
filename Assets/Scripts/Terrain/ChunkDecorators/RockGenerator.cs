@@ -10,8 +10,10 @@ public class RockGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> rocks;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 10;
         rocks = new Dictionary<Vector2, List<GameObject>>();
     }

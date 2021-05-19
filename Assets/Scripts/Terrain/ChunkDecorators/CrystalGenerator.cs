@@ -8,12 +8,16 @@ public class CrystalGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> crystals;
     private Dictionary<Vector2, List<CrystalCluster>> clusters;
-    void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 10;
         crystals = new Dictionary<Vector2, List<GameObject>>();
         clusters = new Dictionary<Vector2, List<CrystalCluster>>();
     }
+    
     public override void OnLodChange(TerrainChunk chunk, int lod)
     {
         base.OnLodChange(chunk, lod);

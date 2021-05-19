@@ -13,8 +13,10 @@ public class FlowerGenerator : ChunkDecorator
     private Dictionary<Vector2, List<FlowerCluster>> clusters;
     private Dictionary<Vector2, GameObject> meshParents;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 10;
         flowers = new Dictionary<Vector2, List<GameObject>>();
         clusters = new Dictionary<Vector2, List<FlowerCluster>>();
@@ -35,7 +37,7 @@ public class FlowerGenerator : ChunkDecorator
         {
             GenerateClusterCenters(chunk, rand, flowerSettings);
             GenerateFlowers(chunk, rand, flowerSettings);
-            CombineMeshesToParent(flowers[chunk.coord], chunk.meshObject);
+            CombineMeshesToParent(flowers[chunk.coord], chunk);
         }
         else if(lod > flowerSettings.lodIndex && flowers.ContainsKey(chunk.coord))
         {

@@ -11,8 +11,10 @@ public class TempleGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> temples;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 5;
         temples = new Dictionary<Vector2, List<GameObject>>();
     }

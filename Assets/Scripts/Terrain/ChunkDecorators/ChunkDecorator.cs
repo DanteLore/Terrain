@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public interface IChunkDecorator
 {    
@@ -13,7 +14,19 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 {
     public int priority { get; protected set; }
 
+    private GameObject pool;
+
     private Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
+
+    private Dictionary<Vector2, List<GameObject>> meshParents = new Dictionary<Vector2, List<GameObject>>();
+
+    private Queue<GameObject> meshPool = new Queue<GameObject>();
+
+    protected virtual void Awake()
+    {
+        pool = new GameObject(this.GetType().Name + " Object Pool");
+        pool.transform.parent = gameObject.transform;
+    }
 
     public void HookEvents(TerrainChunk chunk)
     {
@@ -35,7 +48,15 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 
     public virtual void OnChunkVisibilityChanged(TerrainChunk chunk, bool visible) 
     {
-
+        if(!visible && meshParents.ContainsKey(chunk.coord))
+        {
+            foreach(var p in meshParents[chunk.coord])
+            {
+                p.transform.parent = pool.transform;
+                meshPool.Enqueue(p);
+                p.SetActive(false);
+            }
+        }
     }
 
     public virtual void OnLodChange(TerrainChunk chunk, int lod)
@@ -69,16 +90,19 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
     protected void ReleaseToPool(GameObject obj)
     {
         obj.SetActive(false);
+        obj.transform.SetParent(pool.transform);
         objectPool[obj.name].Enqueue(obj);
     }
 
-    protected GameObject CombineMeshesToParent(List<GameObject> items, GameObject grandparent)
+    protected GameObject CombineMeshesToParent(List<GameObject> items, TerrainChunk chunk)
     {
         if(items.Count == 0)
             return null;
 
-        GameObject parent = new GameObject(this.GetType().Name + " Meshes");
-        parent.transform.parent = grandparent.transform;
+        if(!meshParents.ContainsKey(chunk.coord))
+            meshParents.Add(chunk.coord, new List<GameObject>());
+
+        GameObject parent = CreateParent(chunk);
         parent.AddComponent<UnityEngine.MeshRenderer>();
         parent.AddComponent<UnityEngine.MeshFilter>();
         parent.GetComponent<Renderer>().material = items[0].GetComponent<Renderer>().material;
@@ -100,5 +124,22 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
         parent.transform.gameObject.SetActive(true);
 
         return parent;
+    }
+
+    private GameObject CreateParent(TerrainChunk chunk)
+    {
+        GameObject p;
+        if(meshParents.ContainsKey(chunk.coord) && meshParents[chunk.coord].Any())
+            p = meshParents[chunk.coord].First();
+        else if(meshPool.Count > 0)
+            p = meshPool.Dequeue();
+        else
+            p = new GameObject();
+        
+        p.name = this.GetType().Name + " Meshes";
+        meshParents[chunk.coord].Add(p);
+        p.transform.parent = chunk.meshObject.transform;
+        
+        return p;
     }
 }

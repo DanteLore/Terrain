@@ -9,8 +9,10 @@ public class TreeGenerator : ChunkDecorator
     public int gridStep = 6;
     private Dictionary<Vector2, List<GameObject>> trees;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 10;
         trees = new Dictionary<Vector2, List<GameObject>>();
     }

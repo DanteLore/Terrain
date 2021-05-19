@@ -10,8 +10,10 @@ public class PlantGenerator : ChunkDecorator
 
     private Dictionary<Vector2, List<GameObject>> plants;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 10;
         plants = new Dictionary<Vector2, List<GameObject>>();
     }

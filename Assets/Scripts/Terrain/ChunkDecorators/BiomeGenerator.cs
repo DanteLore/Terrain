@@ -21,8 +21,10 @@ public class BiomeGenerator : ChunkDecorator
 
     private HashSet<Vector2> updatedChunks;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         priority = 1;
         biomes = new List<Biome>();
         generatedCenters = new HashSet<Vector2>();
