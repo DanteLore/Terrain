@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BigSandstoneRockMaterial
+  m_Name: BigGraniteRock
   m_Shader: {fileID: -6465566751694194690, guid: 420fa03417a0f48a1a7bf126cfe69e5a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_3716147fa41b4c35b69b90124db8ab93:
-        m_Texture: {fileID: 2800000, guid: 46e3664a3490949ccaafaab83661aca0, type: 3}
+        m_Texture: {fileID: 2800000, guid: bc6f7e1240feb498a89ecd0960501425, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_d3700d4baa9f46f1a15d19c572e51486:
@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_924de116218143359afd919f37e3349f: 0.2
-    - Vector1_fc2340d366434e92a2f609ea5ca20cab: 0.271
+    - Vector1_fc2340d366434e92a2f609ea5ca20cab: 0.76
     m_Colors:
-    - Color_d4754209319c4e55b443139a86c9b603: {r: 0.7098039, g: 0.6117647, b: 0.5607843, a: 1}
+    - Color_d4754209319c4e55b443139a86c9b603: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   m_BuildTextureStacks: []
