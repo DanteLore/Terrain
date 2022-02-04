@@ -14,8 +14,6 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 {
     public int priority { get; protected set; }
 
-    private GameObject pool;
-
     private Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
 
     private Dictionary<Vector2, List<GameObject>> meshParents = new Dictionary<Vector2, List<GameObject>>();
@@ -24,8 +22,6 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
 
     protected virtual void Awake()
     {
-        pool = new GameObject(this.GetType().Name + " Object Pool");
-        pool.transform.parent = gameObject.transform;
     }
 
     public void HookEvents(TerrainChunk chunk)
@@ -52,7 +48,6 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
         {
             foreach(var p in meshParents[chunk.coord])
             {
-                p.transform.parent = pool.transform;
                 meshPool.Enqueue(p);
                 p.SetActive(false);
             }
@@ -90,7 +85,6 @@ public class ChunkDecorator : MonoBehaviour, IChunkDecorator
     protected void ReleaseToPool(GameObject obj)
     {
         obj.SetActive(false);
-        obj.transform.SetParent(pool.transform);
         objectPool[obj.name].Enqueue(obj);
     }
 
