@@ -15,6 +15,8 @@ public class DayNightCycle : MonoBehaviour
 
     public Color nighttimeFogColor;
 
+    public bool IsNight { get { return currentTimeOfDay < 0.22f || currentTimeOfDay > 0.78f; }}
+
     void Start()
     {
         

@@ -17,3 +17,4 @@ MonoBehaviour:
   rockSettings: {fileID: 11400000, guid: 1e1e18f0646a7439fac0a3660bbee1e2, type: 2}
   plantSettings: {fileID: 11400000, guid: 1c76dd9825c014eef9f97b9fd07062f3, type: 2}
   templeSettings: {fileID: 11400000, guid: 34ae7536da54b4b4990ddcab5f4cfc47, type: 2}
+  mobSettings: {fileID: 11400000, guid: eff7ad77d8dab4092b4f01563d21732e, type: 2}

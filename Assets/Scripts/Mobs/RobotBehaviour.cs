@@ -6,37 +6,99 @@ public class RobotBehaviour : MonoBehaviour
 {
     private Transform player;
 
-    public float TurnSpeed = 3.0f;
-    public float MoveSpeed = 3.0f;
+    private DayNightCycle dayNightCycle;
+
+    public float TurnSpeed = 1.5f;
+    public float MoveSpeed = 1.0f;
     public float PersonalSpaceThreshold = 2.0f;
+    public float FollowRangeThreshold = 20.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        dayNightCycle = GameObject.FindObjectOfType<DayNightCycle>();
     }
 
     // Update is called once per frame
     void Update()
     {
         EmergencyFallPrevention();
-        FollowPlayer();
+        MoveAround();
+        Headlights();
     }
 
-    private void FollowPlayer()
+    private void Headlights()
     {
-        // Rotate to face player
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.position - transform.position), TurnSpeed * Time.deltaTime);
-        
-        // Move forards a bit, but not too close to the player
-        float distance = Vector3.Distance(transform.position, player.position);
-        if(distance > PersonalSpaceThreshold)
+        foreach(Light light in transform.GetComponentsInChildren<Light>())
         {
-            float speed = MoveSpeed * Mathf.InverseLerp(PersonalSpaceThreshold, 100, distance);
-
-            transform.position += transform.forward * speed * Time.deltaTime;
+            light.enabled = dayNightCycle.IsNight;
         }
     }
+
+    Vector3 target;
+
+    private void MoveAround()
+    {
+        /// TODO: This method is shamefully bad... but it makes robots do fun stuff.  Refactor to a state machine kinda setup...
+
+        float playerDistance = Vector3.Distance(transform.position, player.position);
+
+        if(playerDistance < FollowRangeThreshold)
+        {
+            target = player.position;
+            
+            if(playerDistance <= PersonalSpaceThreshold)
+            {
+                // Stare in a spooky way
+                TurnTowards(player.position);
+            }
+            else
+            {
+                // Follow
+                float speed = MoveSpeed * Mathf.InverseLerp(PersonalSpaceThreshold, FollowRangeThreshold, playerDistance);
+                MoveTowards(player.position, speed);
+            }
+        }
+        else
+        {
+            if(target == null)
+            {
+                // New target
+                target = RandomTarget();
+            }
+            var targetDistance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(target.x, target.z));
+
+            if(targetDistance <= PersonalSpaceThreshold)
+            {
+                target = RandomTarget();
+                targetDistance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(target.x, target.z));
+            }
+
+            // Random wander
+            float speed = MoveSpeed * Mathf.InverseLerp(PersonalSpaceThreshold, FollowRangeThreshold, targetDistance);
+            MoveTowards(target, MoveSpeed / 2);
+        }
+    }
+
+    private Vector3 RandomTarget()
+    {
+        Vector2 pos = Random.insideUnitCircle * FollowRangeThreshold;
+        return transform.position + new Vector3(pos.x, 0, pos.y);
+    }
+
+    private void MoveTowards(Vector3 target, float speed)
+    {
+        TurnTowards(target);
+
+        // Move forwards a bit
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
+
+    private void TurnTowards(Vector3 target)
+    {
+        // Rotate to face target
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), TurnSpeed * Time.deltaTime);}
 
     private void EmergencyFallPrevention()
     {

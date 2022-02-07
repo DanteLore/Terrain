@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0, 200, 0);
+        transform.position = new Vector3(0, 100, 0);
         layerMask = ~(LayerMask.GetMask("Terrain", "Water"));
     }
 
