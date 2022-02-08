@@ -6,6 +6,8 @@ public class RobotBehaviour : MonoBehaviour
 {
     private Transform player;
 
+    new private Rigidbody rigidbody;
+
     private DayNightCycle dayNightCycle;
 
     public float TurnSpeed = 1.5f;
@@ -18,6 +20,7 @@ public class RobotBehaviour : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         dayNightCycle = GameObject.FindObjectOfType<DayNightCycle>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -91,8 +94,11 @@ public class RobotBehaviour : MonoBehaviour
     {
         TurnTowards(target);
 
-        // Move forwards a bit
-        transform.position += transform.forward * speed * Time.deltaTime;
+        // Push forwards a bit
+
+        // Choice here between moving the position and hoping not to fall through the ground vs applying force and trying to control some crazy movements!
+        rigidbody.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+        //rigidbody.AddForce(transform.forward * speed);
     }
 
     private void TurnTowards(Vector3 target)

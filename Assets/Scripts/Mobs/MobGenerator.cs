@@ -48,7 +48,7 @@ public class MobGenerator: ChunkDecorator
         System.Random rand = new System.Random(Mathf.RoundToInt(chunk.coord.y) * 1000000 + Mathf.RoundToInt(chunk.coord.x));
         mobs[chunk.coord] = new List<GameObject>();
 
-        if(rand.Next(10) == 1)
+        if(rand.Next(10) >= 5)
         {
             int x = rand.Next(chunk.MapWidth);
             int y = rand.Next(chunk.MapHeight);
